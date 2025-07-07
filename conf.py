@@ -25,7 +25,10 @@ extensions = ['sphinx.ext.duration',
               'sphinx.ext.doctest',
               'sphinx.ext.autodoc',
               'sphinx.ext.autosummary',
+              'myst_parser',
 ]
+
+myst_enable_extensions = ["dollarmath"]
 
 templates_path = ['_templates']
 exclude_patterns = []
