@@ -41,18 +41,29 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      contents: write
 
     if: github.ref == 'refs/heads/main'
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: ./artifact
+
+      - name: Extract content
+        run: |
+          cd artifact
+          tar -xf artifact.tar
+          cp -r * ../main-content/
+        shell: bash
+
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./main-content
+          keep_files: true
 
   preview:
     needs: build
@@ -63,8 +74,10 @@ jobs:
       pull-requests: write
     
     steps:
-      - name: Create preview directory
-        run: mkdir -p preview-content
+      - name: Create directories
+        run: |
+          mkdir -p preview-content
+          mkdir -p main-content
 
       - name: Download artifact
         uses: actions/download-artifact@v4
