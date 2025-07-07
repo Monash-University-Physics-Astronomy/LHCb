@@ -75,21 +75,15 @@ jobs:
       - name: Extract and prepare content
         run: |
           cd artifact
-          tar -tf artifact.tar | head -10  # Debug: show contents
           tar -xf artifact.tar
           ls -la  # Debug: show extracted files
           
-          # Find the actual content directory
-          if [ -d "build/html" ]; then
-            cp -r build/html/* ../preview-content/
-          elif [ -f "index.html" ]; then
-            cp -r * ../preview-content/
-          else
-            # List all directories to debug
-            find . -name "*.html" | head -5
-            echo "No HTML content found in expected locations"
-            exit 1
-          fi
+          # The HTML files are directly in the root, so copy everything
+          cp -r * ../preview-content/
+          
+          # Verify the copy worked
+          echo "Preview content:"
+          ls -la ../preview-content/
         shell: bash
 
       - name: Deploy PR Preview
