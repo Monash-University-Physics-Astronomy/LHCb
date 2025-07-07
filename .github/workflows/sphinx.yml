@@ -63,19 +63,34 @@ jobs:
       pull-requests: write
     
     steps:
+      - name: Create preview directory
+        run: mkdir -p preview-content
+
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: github-pages
-          path: ./preview
+          path: ./artifact
 
-      - name: Extract artifact
+      - name: Extract and prepare content
         run: |
-          cd preview
+          cd artifact
+          tar -tf artifact.tar | head -10  # Debug: show contents
           tar -xf artifact.tar
-          mv * ../preview-content/ || true
-          cd ..
-          rm -rf preview
+          ls -la  # Debug: show extracted files
+          
+          # Find the actual content directory
+          if [ -d "build/html" ]; then
+            cp -r build/html/* ../preview-content/
+          elif [ -f "index.html" ]; then
+            cp -r * ../preview-content/
+          else
+            # List all directories to debug
+            find . -name "*.html" | head -5
+            echo "No HTML content found in expected locations"
+            exit 1
+          fi
+        shell: bash
 
       - name: Deploy PR Preview
         uses: peaceiris/actions-gh-pages@v3
