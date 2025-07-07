@@ -14,5 +14,6 @@ Contents
 
 .. toctree::
 
+   lhcbregistration
    usage
    api
