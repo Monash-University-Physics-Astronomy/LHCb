@@ -15,5 +15,6 @@ Contents
 .. toctree::
 
    lhcbregistration
+   nectar
    usage
    api
