@@ -16,5 +16,6 @@ Contents
 
    lhcbregistration
    nectar
+   todo
    usage
    api
