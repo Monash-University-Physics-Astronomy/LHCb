@@ -3,7 +3,7 @@ name: "Sphinx: Build and Deploy Docs"
 on:
   push:
     branches: [main]
-  pull_request:
+  pull_request_target:  # Changed from pull_request
     branches: [main]
     types: [opened, synchronize, reopened]
 
@@ -82,6 +82,11 @@ jobs:
         run: |
           mkdir -p preview-content
           mkdir -p main-content
+
+      - name: Checkout PR code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Download artifact
         uses: actions/download-artifact@v4
