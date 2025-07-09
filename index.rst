@@ -5,10 +5,6 @@ This page can act as a starterkit for new LHCb people joining the group. The LHC
 
 Check out the :doc:`usage` section for further information, including :ref:`Getting started <installation>` the project.
 
-.. note::
-
-   This project is under active development.
-
 Contents
 --------
 

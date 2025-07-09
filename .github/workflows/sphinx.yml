@@ -3,7 +3,7 @@ name: "Sphinx: Build and Deploy Docs"
 on:
   push:
     branches: [main]
-  pull_request:
+  pull_request_target:  # Changed from pull_request
     branches: [main]
     types: [opened, synchronize, reopened]
 
@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -44,7 +46,7 @@ jobs:
     permissions:
       contents: write
 
-    if: github.ref == 'refs/heads/main' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request_target'
     steps:
       - name: Create main content directory
         run: mkdir -p main-content
@@ -72,12 +74,17 @@ jobs:
   preview:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request_target'
     permissions:
       contents: write
       pull-requests: write
     
     steps:
+      - name: Checkout PR code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
       - name: Create directories
         run: |
           mkdir -p preview-content
