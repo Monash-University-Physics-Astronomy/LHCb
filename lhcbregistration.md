@@ -16,7 +16,7 @@ After approval you will receive an email from the LHCb secretariat titled `Regis
 Be prepared that the whole process might take about a week to complete, including the various approvals and the IT traning course that you have to complete.
 
 ## CERN User
-Your registration should be changed to `USER` at CEN if you plan to go on site. This should be done a maximum 6 months before your visit and at minimum it should be finalised 1 wek before your arrival. 
+Your registration should be changed to `USER` at CERN if you plan to go on site. This should be done a maximum 6 months before your visit and at minimum it should be finalised 1 wek before your arrival. 
 
 The registration is initiated by that either Ulrik or Tom fill in the [EDH document](https://edh.cern.ch/Document/Personnel/PreRegistrationForm) and pick `USER` as the status. In adition the [Home Institute Declaration](https://usersoffice.web.cern.ch/sites/default/files/pdf/Formalities/HomeInstitutionDeclarationforUO.pdf) should be filled in and forwarded to Tom or Ulrik (who in turn gets it signed by the Head of School and attach it to the EDH form). 
 
