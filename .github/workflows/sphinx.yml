@@ -80,15 +80,15 @@ jobs:
       pull-requests: write
     
     steps:
-      - name: Create directories
-        run: |
-          mkdir -p preview-content
-          mkdir -p main-content
-
       - name: Checkout PR code
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Create directories
+        run: |
+          mkdir -p preview-content
+          mkdir -p main-content
 
       - name: Download artifact
         uses: actions/download-artifact@v4
