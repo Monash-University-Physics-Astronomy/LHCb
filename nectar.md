@@ -33,7 +33,7 @@ ssh -vvv nectar9
 ask for help, including the output of the last command.
 
 ## Disk space
-On the `nectar` cluster you have a home directory at `/home/<user>`. You are the only one who can read content in that directory. To share data with other users, create a directory below `/shared` that has an explaining name. Everybody on the cluster will hav access to those files.
+On the `nectar` cluster you have a home directory at `/home/<user>`. You are the only one who can read content in that directory. To share data with other users, create a directory below `/shared` that has an explaining name. Everybody on the cluster will have access to those files.
 
 Be aware that there is **no backup** and **no undo** of files you delete, or indeed everything if there is a disk failure. For code, you should use GitHub/Gitlab or similar to track your changes and for data, it should either be available elsewhere or should be relatively easy to recreate.
 
