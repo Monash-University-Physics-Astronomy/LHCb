@@ -20,6 +20,6 @@ sPlots
 .. toctree::
    :maxdepth: 1
 
-   sPlot
+   notebooks/sPlot
 
 
