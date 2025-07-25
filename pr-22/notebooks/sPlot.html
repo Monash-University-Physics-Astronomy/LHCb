@@ -1,0 +1,1194 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sPlot &mdash; Monash LHCb 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Reading and processing LHCb data files" href="analysis_basics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Monash LHCb
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../lhcbregistration.html">Registration in the LHCb collaboration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nectar.html">Nectar computing cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#analysis-tools">Analysis tools</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#splots">sPlots</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">sPlot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Toy-example:-extracting-the-lifetime-distribution-of-an-unstable-particle">Toy example: extracting the lifetime distribution of an unstable particle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#The-sWeights-recipe">The sWeights recipe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Toy-model">Toy model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Impact-of-uncertainties-in-sWeights-extracted-from-the-data">Impact of uncertainties in sWeights extracted from the data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Fitting-shape-parameters-in-addition-to-the-yield-parameters">Fitting shape parameters in addition to the yield parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sWeights-as-orthogonal-functions">sWeights as orthogonal functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Reformulation-of-sWeight-method">Reformulation of sWeight method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sWeight-implementations">sWeight implementations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Important-requirement-of-sPlot">Important requirement of sPlot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Efficiency-corrected-yields">Efficiency corrected yields</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Monash LHCb</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">sPlot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/sPlot.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sPlot">
+<h1>sPlot<a class="headerlink" href="#sPlot" title="Link to this heading"></a></h1>
+<p>This notebook explains sPLot and how to compute the sWeights. The technique called sPlot, is able to unfold the contributions of the different sources for a given control variable. It relies on maximum likelihood fits to determine the yields of the various sources.</p>
+<p>Original paper: M. Pivk &amp; F. Le Diberder, arXiv:physics/0402083, NIMA 555 (2005) 356</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modules used:</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">iminuit</span><span class="w"> </span><span class="kn">import</span> <span class="n">cost</span><span class="p">,</span> <span class="n">Minuit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba_stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">truncnorm</span><span class="p">,</span> <span class="n">truncexpon</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.gridspec</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gridspec</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Functions I use:</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Generate_toy</span><span class="p">():</span>
+    <span class="c1"># Signal</span>
+    <span class="n">nsig_sw</span> <span class="o">=</span> <span class="mi">20000</span>
+    <span class="n">np_sig_m_sw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">5279</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">nsig_sw</span><span class="p">)</span>
+    <span class="n">np_sig_t_sw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">nsig_sw</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Background:</span>
+    <span class="n">nbkg_sw</span> <span class="o">=</span> <span class="mi">150000</span>
+    <span class="n">np_bkg_m_sw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">nbkg_sw</span><span class="p">)</span> <span class="o">+</span> <span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">np_bkg_t_sw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">nbkg_sw</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+
+    <span class="c1"># Mass cut:</span>
+    <span class="n">m_cut</span> <span class="o">=</span> <span class="n">np_bkg_m_sw</span> <span class="o">&lt;</span> <span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">np_bkg_t_sw</span> <span class="o">=</span> <span class="n">np_bkg_t_sw</span><span class="p">[</span><span class="n">m_cut</span><span class="p">]</span>
+    <span class="n">np_bkg_m_sw</span> <span class="o">=</span> <span class="n">np_bkg_m_sw</span><span class="p">[</span><span class="n">m_cut</span><span class="p">]</span>
+
+    <span class="c1"># Lifetime cut:</span>
+    <span class="n">t_cut</span> <span class="o">=</span> <span class="n">np_bkg_t_sw</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="n">np_bkg_t_sw</span> <span class="o">=</span> <span class="n">np_bkg_t_sw</span><span class="p">[</span><span class="n">t_cut</span><span class="p">]</span>
+    <span class="n">np_bkg_m_sw</span> <span class="o">=</span> <span class="n">np_bkg_m_sw</span><span class="p">[</span><span class="n">t_cut</span><span class="p">]</span>
+
+    <span class="c1"># Mass distribution</span>
+    <span class="n">np_m_sw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np_sig_m_sw</span><span class="p">,</span> <span class="n">np_bkg_m_sw</span><span class="p">])</span>
+
+    <span class="c1"># Lifetime distribution</span>
+    <span class="n">np_t_sw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np_sig_t_sw</span><span class="p">,</span> <span class="n">np_bkg_t_sw</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">np_sig_m_sw</span><span class="p">,</span> <span class="n">np_sig_t_sw</span><span class="p">,</span> <span class="n">np_bkg_m_sw</span><span class="p">,</span> <span class="n">np_bkg_t_sw</span><span class="p">,</span> <span class="n">np_m_sw</span><span class="p">,</span> <span class="n">np_t_sw</span><span class="p">)</span>
+
+<span class="c1"># Plotting function:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_mass</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">50</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="c1"># Sig and Bkg amount:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+
+    <span class="n">sig_values</span> <span class="o">=</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">],</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">])</span>
+    <span class="n">bkg_values</span> <span class="o">=</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">])</span>
+
+    <span class="n">signal_part</span> <span class="o">=</span> <span class="p">((</span><span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">bins</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">b</span><span class="p">))</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">sig_values</span>
+    <span class="n">background_part</span> <span class="o">=</span> <span class="p">((</span><span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">bins</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">b</span><span class="p">))</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">bkg_values</span>
+
+    <span class="c1"># Figure:</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">gs</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">height_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Main plot:</span>
+    <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">counts</span><span class="p">,</span> <span class="n">bin_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+    <span class="n">bin_centers</span> <span class="o">=</span> <span class="p">(</span><span class="n">bin_edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bin_edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">bin_widths</span> <span class="o">=</span> <span class="p">(</span><span class="n">bin_edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">bin_edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">y_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">bin_centers</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="n">bin_widths</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">signal_part</span> <span class="o">+</span> <span class="n">background_part</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">signal_part</span><span class="p">,</span> <span class="s1">&#39;g--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Signal&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">background_part</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Background&#39;</span><span class="p">)</span>
+    <span class="c1"># axs.set_title(r&#39;Mass of $\Xi_{cc}^{++}$&#39;, fontsize=20)</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Mass (MeV)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Counts&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Calculate residuals</span>
+    <span class="n">counts_m_sig</span> <span class="o">=</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">bin_centers</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">],</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">])</span>
+    <span class="n">counts_m_bkg</span> <span class="o">=</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">bin_centers</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">])</span>
+    <span class="n">counts_m</span> <span class="o">=</span> <span class="p">((</span><span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">bins</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">b</span><span class="p">))</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">counts_m_sig</span> <span class="o">+</span> <span class="p">((</span><span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">bins</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">b</span><span class="p">))</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">counts_m_bkg</span>
+
+    <span class="n">residuals</span> <span class="o">=</span> <span class="p">(</span><span class="n">counts</span> <span class="o">-</span> <span class="n">counts_m</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">counts</span><span class="p">))</span>
+
+    <span class="c1"># Residuals plot</span>
+    <span class="n">axs_residuals</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">axs_residuals</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bin_centers</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Residuals&#39;</span><span class="p">)</span>
+    <span class="n">axs_residuals</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Mass (MeV)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">axs_residuals</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Pull&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">axs_residuals</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<section id="Toy-example:-extracting-the-lifetime-distribution-of-an-unstable-particle">
+<h2>Toy example: extracting the lifetime distribution of an unstable particle<a class="headerlink" href="#Toy-example:-extracting-the-lifetime-distribution-of-an-unstable-particle" title="Link to this heading"></a></h2>
+<p>If a data sample is populated by different sources of events, like signal and background (e.g. Combinatorial), sPlot is able to unfold the contributions of different sourcess for a given variable. Let’s construct a dataset with two variables, the invariant mass (<span class="math notranslate nohighlight">\(m\)</span>) and lifetime (<span class="math notranslate nohighlight">\(t\)</span>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate points:</span>
+
+<span class="c1"># mass range:</span>
+<span class="n">xr</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">6000</span><span class="p">)</span>
+
+<span class="p">(</span><span class="n">np_sig_m_sw</span><span class="p">,</span> <span class="n">np_sig_t_sw</span><span class="p">,</span> <span class="n">np_bkg_m_sw</span><span class="p">,</span> <span class="n">np_bkg_t_sw</span><span class="p">,</span> <span class="n">np_m_sw</span><span class="p">,</span> <span class="n">np_t_sw</span><span class="p">)</span> <span class="o">=</span> <span class="n">Generate_toy</span><span class="p">()</span>
+
+<span class="c1"># Plots the mass and lifetime distribution.</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np_bkg_m_sw</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.7</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;background&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np_sig_m_sw</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.7</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;signal&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np_bkg_t_sw</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;background&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.7</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np_sig_t_sw</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;signal&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.7</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_sPlot_6_0.png" src="../_images/notebooks_sPlot_6_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine data into arrays</span>
+<span class="n">data_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np_m_sw</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np_t_sw</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">])</span>
+
+<span class="c1"># Create DataFrames</span>
+<span class="n">data_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_arr</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="s2">&quot;lifetime&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mass</th>
+      <th>lifetime</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5269.771424</td>
+      <td>0.827962</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5308.229140</td>
+      <td>0.055788</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5286.560226</td>
+      <td>0.475994</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5289.328446</td>
+      <td>1.381739</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5300.104157</td>
+      <td>2.567703</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>134256</th>
+      <td>5843.269309</td>
+      <td>0.880811</td>
+    </tr>
+    <tr>
+      <th>134257</th>
+      <td>5045.243512</td>
+      <td>4.524381</td>
+    </tr>
+    <tr>
+      <th>134258</th>
+      <td>5059.156021</td>
+      <td>2.469355</td>
+    </tr>
+    <tr>
+      <th>134259</th>
+      <td>5155.010428</td>
+      <td>6.180055</td>
+    </tr>
+    <tr>
+      <th>134260</th>
+      <td>5557.358190</td>
+      <td>0.602508</td>
+    </tr>
+  </tbody>
+</table>
+<p>134261 rows × 2 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots the mass and lifetime distribution.</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np_m_sw</span> <span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.7</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np_t_sw</span> <span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.7</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_sPlot_9_0.png" src="../_images/notebooks_sPlot_9_0.png" />
+</div>
+</div>
+<p>Data model in discriminant variable Mass (<span class="math notranslate nohighlight">\(m\)</span>) and control variable Lifetime (<span class="math notranslate nohighlight">\(t\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[f(m, t)=N_0 d_0(m) s(t)+N_1 d_1(m) b(t)\]</div>
+<ul class="simple">
+<li><p>known: signal PDF <span class="math notranslate nohighlight">\(d_0(m)\)</span> and background PDF <span class="math notranslate nohighlight">\(d_1(m)\)</span></p></li>
+<li><p>wanted:signal PDF <span class="math notranslate nohighlight">\(s(t)\)</span> and background PDF <span class="math notranslate nohighlight">\(b(t)\)</span></p></li>
+</ul>
+</section>
+<section id="The-sWeights-recipe">
+<h2>The sWeights recipe<a class="headerlink" href="#The-sWeights-recipe" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fit <span class="math notranslate nohighlight">\(N_0\)</span> and <span class="math notranslate nohighlight">\(N_1\)</span> of the data model in <span class="math notranslate nohighlight">\(m: f(m)=N_0 d_0(m)+N_1 d_1(m)\)</span></p></li>
+<li><p>With <span class="math notranslate nohighlight">\(N_0\)</span> and <span class="math notranslate nohighlight">\(N_1\)</span> and their covariance matrix elements <span class="math notranslate nohighlight">\(C_{00}\)</span> and <span class="math notranslate nohighlight">\(C_{01}\)</span> determine:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[w_s(m)=\frac{C_{00} d_0(m)+C_{01} d_1(m)}{N_0 d_0(m)+N_1 d_1(m)}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_s(m)\)</span> is a function of only <span class="math notranslate nohighlight">\(m\)</span></p></li>
+<li><p>use <span class="math notranslate nohighlight">\(w_s(m)\)</span> as weight when filling <span class="math notranslate nohighlight">\(t\)</span>-histograms to obtain the signal density: <span class="math notranslate nohighlight">\(N_0 s(t)\)</span></p></li>
+<li><p>background distribution can be obtained by <span class="math notranslate nohighlight">\(w_b(m)=1-w_s(m)\)</span></p></li>
+<li><p>bin contents in bin <span class="math notranslate nohighlight">\(\Delta t\)</span> are</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[s(\Delta t)=\sum_{\text {entries in } \Delta t} w_s(m)\]</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_sweights</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">yields</span><span class="p">,</span> <span class="n">V</span><span class="p">):</span> <span class="c1"># with V already worked out</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute sWeights for an arbitrary number of sources.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - values: A 2D array (n_samples x n_sources) of PDF values for each source.</span>
+<span class="sd">    - yields: A 1D array (n_sources) of yields for each source.</span>
+<span class="sd">    - V: The covariance matrix (n_sources x n_sources).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - sWeights: A 2D array (n_samples x n_sources) where each column contains the sWeights for a source.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pdf_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="c1"># Shape: (n_sources, n_samples)</span>
+    <span class="n">yields_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">yields</span><span class="p">)</span>  <span class="c1"># Shape: (n_sources,)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>  <span class="c1"># Shape: (n_sources, n_sources)</span>
+
+    <span class="c1"># Compute the total sum for normalization</span>
+    <span class="n">total_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">yields_arr</span><span class="p">,</span> <span class="n">pdf_val</span><span class="p">)</span>  <span class="c1"># Shape: (n_samples,)</span>
+
+    <span class="c1"># Compute sWeights for each source</span>
+    <span class="n">sweights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">pdf_val</span><span class="p">)</span>  <span class="c1"># Initialize array to store sWeights</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>  <span class="c1"># Iterate over sources</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="n">sweights</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">sweights</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">pdf_val</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">sweights</span><span class="o">/</span><span class="n">total_sum</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Toy-model">
+<h2>Toy model<a class="headerlink" href="#Toy-model" title="Link to this heading"></a></h2>
+<section id="Perform-Unbinned-maximum-likelihood-fit:">
+<h3>Perform Unbinned maximum likelihood fit:<a class="headerlink" href="#Perform-Unbinned-maximum-likelihood-fit:" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">density</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">s</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">tau</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">cost</span><span class="o">.</span><span class="n">ExtendedUnbinnedNLL</span><span class="p">(</span><span class="n">np_m_sw</span><span class="p">,</span> <span class="n">density</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Minuit</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">150000</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">5279</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fixed</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="s1">&#39;tau&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">m</span><span class="o">.</span><span class="n">migrad</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table>
+    <tr>
+        <th colspan="5" style="text-align:center" title="Minimizer"> Migrad </th>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:left" title="Minimum value of function"> FCN = -1.156e+06 </td>
+        <td colspan="3" style="text-align:center" title="Total number of function and (optional) gradient evaluations"> Nfcn = 45 </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:left" title="Estimated distance to minimum and goal"> EDM = 3.51e-07 (Goal: 0.0002) </td>
+        <td colspan="3" style="text-align:center" title="Total run time of algorithms"> time = 0.1 sec </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:center;background-color:#92CCA6;color:black"> Valid Minimum </td>
+        <td colspan="3" style="text-align:center;background-color:#92CCA6;color:black"> No Parameters at limit </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:center;background-color:#92CCA6;color:black"> Below EDM threshold (goal x 10) </td>
+        <td colspan="3" style="text-align:center;background-color:#92CCA6;color:black"> Below call limit </td>
+    </tr>
+    <tr>
+        <td style="text-align:center;background-color:#92CCA6;color:black"> Covariance </td>
+        <td style="text-align:center;background-color:#92CCA6;color:black"> Hesse ok </td>
+        <td style="text-align:center;background-color:#92CCA6;color:black" title="Is covariance matrix accurate?"> Accurate </td>
+        <td style="text-align:center;background-color:#92CCA6;color:black" title="Is covariance matrix positive definite?"> Pos. def. </td>
+        <td style="text-align:center;background-color:#92CCA6;color:black" title="Was positive definiteness enforced by Minuit?"> Not forced </td>
+    </tr>
+</table><table>
+    <tr>
+        <td></td>
+        <th title="Variable name"> Name </th>
+        <th title="Value of parameter"> Value </th>
+        <th title="Hesse error"> Hesse Error </th>
+        <th title="Minos lower error"> Minos Error- </th>
+        <th title="Minos upper error"> Minos Error+ </th>
+        <th title="Lower limit of the parameter"> Limit- </th>
+        <th title="Upper limit of the parameter"> Limit+ </th>
+        <th title="Is the parameter fixed in the fit"> Fixed </th>
+    </tr>
+    <tr>
+        <th> 0 </th>
+        <td> s </td>
+        <td> 19.94e3 </td>
+        <td> 0.18e3 </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+    </tr>
+    <tr>
+        <th> 1 </th>
+        <td> b </td>
+        <td> 113.6e3 </td>
+        <td> 0.4e3 </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+    </tr>
+    <tr>
+        <th> 2 </th>
+        <td> mu </td>
+        <td> 5.28e3 </td>
+        <td> 0.05e3 </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> yes </td>
+    </tr>
+    <tr>
+        <th> 3 </th>
+        <td> sigma </td>
+        <td> 20.0 </td>
+        <td> 0.2 </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> yes </td>
+    </tr>
+    <tr>
+        <th> 4 </th>
+        <td> tau </td>
+        <td> 300 </td>
+        <td> 3 </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> yes </td>
+    </tr>
+</table><table>
+    <tr>
+        <td></td>
+        <th> s </th>
+        <th> b </th>
+        <th> mu </th>
+        <th> sigma </th>
+        <th> tau </th>
+    </tr>
+    <tr>
+        <th> s </th>
+        <td> 3.43e+04 </td>
+        <td style="background-color:rgb(222,222,250);color:black"> -1.43e+04 <strong>(-0.216)</strong> </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+    </tr>
+    <tr>
+        <th> b </th>
+        <td style="background-color:rgb(222,222,250);color:black"> -1.43e+04 <strong>(-0.216)</strong> </td>
+        <td> 1.28e+05 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+    </tr>
+    <tr>
+        <th> mu </th>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+    </tr>
+    <tr>
+        <th> sigma </th>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+    </tr>
+    <tr>
+        <th> tau </th>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td style="background-color:rgb(250,250,250);color:black"> 0 </td>
+        <td> 0 </td>
+    </tr>
+</table></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_mass</span><span class="p">(</span><span class="n">np_m_sw</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_sPlot_18_0.png" src="../_images/notebooks_sPlot_18_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">covariance</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">truncnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np_m_sw</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mi">5279</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np_m_sw</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">300</span><span class="p">)]</span>
+<span class="n">yields</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">],</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]]</span>
+
+<span class="n">sWeights</span> <span class="o">=</span> <span class="n">compute_sweights</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">yields</span><span class="p">,</span> <span class="n">C</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;sWeights&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sWeights</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot the full lifetime distribution</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;mass&#39;</span><span class="p">],</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;sWeights&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;signal sWeights&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;mass&#39;</span><span class="p">],</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;sWeights&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;background sWeights&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Labels and title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;sWeights&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_sPlot_21_0.png" src="../_images/notebooks_sPlot_21_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot the full lifetime distribution</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;lifetime&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;sWeights&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Reconstructed background&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;lifetime&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;sWeights&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Reconstructed signal&#39;</span><span class="p">)</span>
+<span class="c1"># Labels and title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;sWeighted counts&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_sPlot_22_0.png" src="../_images/notebooks_sPlot_22_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot the full lifetime distribution</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np_sig_t_sw</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;True signal&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;lifetime&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;sWeights&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Reconstructed signal&#39;</span><span class="p">)</span>
+<span class="c1"># Labels and title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;sWeighted counts&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_sPlot_23_0.png" src="../_images/notebooks_sPlot_23_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot the full lifetime distribution</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np_bkg_t_sw</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;True background&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;lifetime&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;sWeights&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Reconstructed background&#39;</span><span class="p">)</span>
+<span class="c1"># Labels and title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;sWeighted counts&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_sPlot_24_0.png" src="../_images/notebooks_sPlot_24_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Signal and background lifetime distributions (t) are correctly disentangled.</p></li>
+<li><p>Requires only a single normalisation fit with two free parameters.</p></li>
+</ul>
+</section>
+</section>
+<section id="Impact-of-uncertainties-in-sWeights-extracted-from-the-data">
+<h2>Impact of uncertainties in sWeights extracted from the data<a class="headerlink" href="#Impact-of-uncertainties-in-sWeights-extracted-from-the-data" title="Link to this heading"></a></h2>
+<div class="math notranslate nohighlight">
+\[\sigma^2(s)=\sum_{\text {bins } k}\left[w_k^2+\sigma^2\left(w_k\right)\right] a_k=\sum_{\text {events } k}\left[w_k^2+O\left(\frac{1}{N}\right)\right]\]</div>
+<ul class="simple">
+<li><p>asymptotically the variance in a <span class="math notranslate nohighlight">\(\Delta t\)</span>-bin is <span class="math notranslate nohighlight">\(\sum w^2\)</span></p></li>
+<li><p>for finite statistics there are corrections of <span class="math notranslate nohighlight">\(O(1 / N)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(1 / N)\)</span> terms occur also as covariances between bins</p></li>
+</ul>
+</section>
+<section id="Fitting-shape-parameters-in-addition-to-the-yield-parameters">
+<h2>Fitting shape parameters in addition to the yield parameters<a class="headerlink" href="#Fitting-shape-parameters-in-addition-to-the-yield-parameters" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>With the shape parameters in the covariance matrix, the modified covariance matrix will then produce the wrong sWeights and biased results.</p></li>
+<li><p>Need to adapt the procedure slightly:</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>First fit with all the parameters floating,</p></li>
+<li><p>Then fix the shape parameters, and get the covariance matrix from the pure normalisation fit.</p></li>
+</ol>
+</section>
+<section id="sWeights-as-orthogonal-functions">
+<h2>sWeights as orthogonal functions<a class="headerlink" href="#sWeights-as-orthogonal-functions" title="Link to this heading"></a></h2>
+<section id="Properties-of-the-sWeights-classic">
+<h3>Properties of the sWeights classic<a class="headerlink" href="#Properties-of-the-sWeights-classic" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Can disentagle signal and background</p></li>
+<li><p>Though, can not deal with constraints on yield ratios: would change the underlying covariance matrix</p></li>
+<li><p>Also, can not change mass ranges.</p></li>
+</ul>
+</section>
+</section>
+<section id="Reformulation-of-sWeight-method">
+<h2>Reformulation of sWeight method<a class="headerlink" href="#Reformulation-of-sWeight-method" title="Link to this heading"></a></h2>
+<p>Starting from the data model …</p>
+<div class="math notranslate nohighlight">
+\[f(m, t)=N_0 d_0(m) s(t)+N_1 d_1(m) b(t)\]</div>
+<p>approximation by the sum over sWeights</p>
+<div class="math notranslate nohighlight">
+\[s(\Delta t)=\int_{\Delta t} d t N_0 s(t)=\sum_{\text {entries in } \Delta t} w_s(m)\]</div>
+<p>replace the sum by the integral over the density</p>
+<div class="math notranslate nohighlight">
+\[s(\Delta t)=\int_{\Delta t} d t N_0 s(t)=\sum_{\text {entries in } \Delta t} w_s(m)=\int_{\Delta t} d t \int d m f(m, t) w_s(m)\]</div>
+<p>relation between signal density, data model and sWeights</p>
+<div class="math notranslate nohighlight">
+\[N_0 s(t)=\int d m f(m, t) w_s(m)\]</div>
+<p>substitute the explicit form for <span class="math notranslate nohighlight">\(f(m, t)\)</span></p>
+<div class="math notranslate nohighlight">
+\[N_0 s(t)=\int d m f(m, t) w_s(m)=\int d m\left[N_0 d_0(m) s(t)+N_1 d_1(m) b(t)\right] w_s(m)\]</div>
+<p>separate into a sum of two integrals</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+N_0 s(t) = N_0 s(t) \int d m d_0(m) w_s(m)+N_1 b(t) \int d m d_1(m) w_s(m)
+\end{aligned}\]</div>
+<section id="Key-observation">
+<h3>Key observation<a class="headerlink" href="#Key-observation" title="Link to this heading"></a></h3>
+<div class="math notranslate nohighlight">
+\[\int d m d_0(m) w_s(m)=1 \quad \text { and } \quad \int d m d_1(m) w_s(m)=0\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_s(m)\)</span> is orthogonal to the background PDF <span class="math notranslate nohighlight">\(d_1(m)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(w_s(m)\)</span> is normalised with respect to the signal PDF <span class="math notranslate nohighlight">\(d_0(m)\)</span></p></li>
+<li><p>infinitely many functions satisfy these constraints</p></li>
+<li><p>select the one that minimises the variance of the total signal yield</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+N_0 &amp; =\sum_{\text {events }} w_s(m) \\
+\sigma^2\left(N_0\right)=\sum_{\text {events }} w_s^2(m) &amp; =\int d t d m f(m, t) w_s^2(m)=\min
+\end{aligned}\end{split}\]</div>
+</section>
+<section id="Result">
+<h3>Result<a class="headerlink" href="#Result" title="Link to this heading"></a></h3>
+<div class="math notranslate nohighlight">
+\[w_s(m)=\frac{\alpha_0 d_0(m)+\alpha_1 d_1(m)}{N_0 d_0(m)+N_1 d_1(m)}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\alpha_0\)</span> and <span class="math notranslate nohighlight">\(\alpha_1\)</span> given by the solution of a matrix equation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left(\begin{array}{ll}
+W_{00} &amp; W_{01} \\
+W_{01} &amp; W_{11}
+\end{array}\right) \cdot\binom{\alpha_0}{\alpha_1}=\binom{1}{0} \quad \text { and } \quad W_{k l}=\int d m \frac{d_k(m) d_l(m)}{N_0 d_0(m)+N_1 d_1(m)}\end{split}\]</div>
+<ul class="simple">
+<li><p>the result is equivalent to the normalisation-fit recipe</p></li>
+<li><p>the optimal weights can be calculated directly from the measurement model</p></li>
+<li><p>no-refit needed after fitting shape parameters or when changing <span class="math notranslate nohighlight">\(m\)</span>-ranges</p></li>
+<li><p>any uncertainties on <span class="math notranslate nohighlight">\(N_0, N_1\)</span> or shapes can be propagated into <span class="math notranslate nohighlight">\(w_s(m)\)</span></p></li>
+</ul>
+</section>
+</section>
+<section id="sWeight-implementations">
+<h2>sWeight implementations<a class="headerlink" href="#sWeight-implementations" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>via Extended Maximum Likelihood fit of signal and background yields,</p></li>
+<li><p>numerical/analytical calculation of <span class="math notranslate nohighlight">\(W_{k l}\)</span>,</p></li>
+<li><p>plug-in estimate for <span class="math notranslate nohighlight">\(W_{k l}\)</span> based on data:</p></li>
+</ol>
+<ul class="simple">
+<li><p>express the <span class="math notranslate nohighlight">\(W_{k l}\)</span> integral as an expectation value over the <span class="math notranslate nohighlight">\(m\)</span>-density</p></li>
+<li><p>estimate this expectation value from the data</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+W_{k l}  =\int d m \frac{d_k(m) d_l(m)}{N_0 d_0(m)+N_1 d_1(m)} \\
+ =N \int d m \frac{d_k(m) d_l(m)}{\left(N_0 d_0(m)+N_1 d_1(m)\right)^2}\left(\frac{N_0}{N} d_0(m)+\frac{N_1}{N} d_1(m)\right) \\
+ =N\left\langle\frac{d_k(m) d_l(m)}{\left(N_0 d_0(m)+N_1 d_1(m)\right)^2}\right\rangle \rightarrow \sum_i \frac{d_k\left(m_i\right) d_l\left(m_i\right)}{\left(\hat{N}_0 d_0\left(m_i\right)+\hat{N}_1 d_1\left(m_i\right)\right)^2}
+\end{aligned}\end{split}\]</div>
+<p>for finite <span class="math notranslate nohighlight">\(N\)</span> this scheme satisfies <span class="math notranslate nohighlight">\(\sum w_s=\hat{N}_0\)</span></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define sweights functions (for iMinuit usage) for each bin:</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_sweight_matrix</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">yields</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Compute the sWeight covariance matrix (V) for a set of sources.</span>
+
+<span class="sd">            This function calculates the sWeight covariance matrix (V) for a set of sources,</span>
+<span class="sd">            given the PDF values and yields for each source.</span>
+
+<span class="sd">            Parameters:</span>
+<span class="sd">            - values: 2D array-like (n_samples x n_sources)</span>
+<span class="sd">                    A matrix where each row corresponds to a sample, and each column corresponds</span>
+<span class="sd">                    to the PDF values for a particular source (e.g., signal, background, etc.).</span>
+<span class="sd">            - yields: 1D array-like (n_sources)</span>
+<span class="sd">                    An array containing the yields for each source.</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">            - V: 2D numpy array (n_sources x n_sources)</span>
+<span class="sd">                    The sWeight covariance matrix (V), which can be used to calculate sWeights</span>
+<span class="sd">                    for each source.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="c1"># Convert inputs to numpy arrays</span>
+            <span class="n">pdf_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+            <span class="n">yields_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">yields</span><span class="p">)</span>
+            <span class="c1"># Compute the total squared normalization term</span>
+            <span class="n">total_squared</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">yields_arr</span><span class="p">,</span> <span class="n">pdf_val</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+            <span class="c1"># Initialize the inverse covariance matrix (V_inv)</span>
+            <span class="n">V_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">yields</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">yields</span><span class="p">)))</span>
+
+            <span class="c1"># Compute the elements of V_inv</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yields</span><span class="p">)):</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yields</span><span class="p">)):</span>
+                            <span class="n">V_inv</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pdf_val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_squared</span><span class="p">,</span> <span class="n">pdf_val</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+            <span class="c1"># Compute the covariance matrix V by inverting V_inv</span>
+            <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">V_inv</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">V</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now floating shape parameters:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">density</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">s</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">tau</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">cost</span><span class="o">.</span><span class="n">ExtendedUnbinnedNLL</span><span class="p">(</span><span class="n">np_m_sw</span><span class="p">,</span> <span class="n">density</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Minuit</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">150000</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">5279</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">migrad</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table>
+    <tr>
+        <th colspan="5" style="text-align:center" title="Minimizer"> Migrad </th>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:left" title="Minimum value of function"> FCN = -1.156e+06 </td>
+        <td colspan="3" style="text-align:center" title="Total number of function and (optional) gradient evaluations"> Nfcn = 76 </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:left" title="Estimated distance to minimum and goal"> EDM = 5.19e-06 (Goal: 0.0002) </td>
+        <td colspan="3" style="text-align:center" title="Total run time of algorithms"> time = 0.2 sec </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:center;background-color:#92CCA6;color:black"> Valid Minimum </td>
+        <td colspan="3" style="text-align:center;background-color:#92CCA6;color:black"> No Parameters at limit </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:center;background-color:#92CCA6;color:black"> Below EDM threshold (goal x 10) </td>
+        <td colspan="3" style="text-align:center;background-color:#92CCA6;color:black"> Below call limit </td>
+    </tr>
+    <tr>
+        <td style="text-align:center;background-color:#92CCA6;color:black"> Covariance </td>
+        <td style="text-align:center;background-color:#92CCA6;color:black"> Hesse ok </td>
+        <td style="text-align:center;background-color:#92CCA6;color:black" title="Is covariance matrix accurate?"> Accurate </td>
+        <td style="text-align:center;background-color:#92CCA6;color:black" title="Is covariance matrix positive definite?"> Pos. def. </td>
+        <td style="text-align:center;background-color:#92CCA6;color:black" title="Was positive definiteness enforced by Minuit?"> Not forced </td>
+    </tr>
+</table><table>
+    <tr>
+        <td></td>
+        <th title="Variable name"> Name </th>
+        <th title="Value of parameter"> Value </th>
+        <th title="Hesse error"> Hesse Error </th>
+        <th title="Minos lower error"> Minos Error- </th>
+        <th title="Minos upper error"> Minos Error+ </th>
+        <th title="Lower limit of the parameter"> Limit- </th>
+        <th title="Upper limit of the parameter"> Limit+ </th>
+        <th title="Is the parameter fixed in the fit"> Fixed </th>
+    </tr>
+    <tr>
+        <th> 0 </th>
+        <td> s </td>
+        <td> 19.91e3 </td>
+        <td> 0.20e3 </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 0 </td>
+        <td>  </td>
+        <td>  </td>
+    </tr>
+    <tr>
+        <th> 1 </th>
+        <td> b </td>
+        <td> 113.6e3 </td>
+        <td> 0.4e3 </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 0 </td>
+        <td>  </td>
+        <td>  </td>
+    </tr>
+    <tr>
+        <th> 2 </th>
+        <td> mu </td>
+        <td> 5.27910e3 </td>
+        <td> 0.00022e3 </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+    </tr>
+    <tr>
+        <th> 3 </th>
+        <td> sigma </td>
+        <td> 19.91 </td>
+        <td> 0.20 </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+    </tr>
+    <tr>
+        <th> 4 </th>
+        <td> tau </td>
+        <td> 298.4 </td>
+        <td> 1.2 </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+    </tr>
+</table><table>
+    <tr>
+        <td></td>
+        <th> s </th>
+        <th> b </th>
+        <th> mu </th>
+        <th> sigma </th>
+        <th> tau </th>
+    </tr>
+    <tr>
+        <th> s </th>
+        <td> 3.8e+04 </td>
+        <td style="background-color:rgb(220,220,250);color:black"> -1.84e+04 <strong>(-0.230)</strong> </td>
+        <td style="background-color:rgb(243,243,250);color:black"> -2.23 <strong>(-0.052)</strong> </td>
+        <td style="background-color:rgb(250,185,185);color:black"> 17.2 <strong>(0.432)</strong> </td>
+        <td style="background-color:rgb(247,247,250);color:black"> -4.91 <strong>(-0.022)</strong> </td>
+    </tr>
+    <tr>
+        <th> b </th>
+        <td style="background-color:rgb(220,220,250);color:black"> -1.84e+04 <strong>(-0.230)</strong> </td>
+        <td> 1.69e+05 </td>
+        <td style="background-color:rgb(250,249,249);color:black"> 0.356 <strong>(0.004)</strong> </td>
+        <td style="background-color:rgb(222,222,250);color:black"> -17.9 <strong>(-0.213)</strong> </td>
+        <td style="background-color:rgb(250,249,249);color:black"> 2.97 <strong>(0.006)</strong> </td>
+    </tr>
+    <tr>
+        <th> mu </th>
+        <td style="background-color:rgb(243,243,250);color:black"> -2.23 <strong>(-0.052)</strong> </td>
+        <td style="background-color:rgb(250,249,249);color:black"> 0.356 <strong>(0.004)</strong> </td>
+        <td> 0.0488 </td>
+        <td style="background-color:rgb(244,244,250);color:black"> -0.00192 <strong>(-0.043)</strong> </td>
+        <td style="background-color:rgb(246,246,250);color:black"> -0.00839 <strong>(-0.033)</strong> </td>
+    </tr>
+    <tr>
+        <th> sigma </th>
+        <td style="background-color:rgb(250,185,185);color:black"> 17.2 <strong>(0.432)</strong> </td>
+        <td style="background-color:rgb(222,222,250);color:black"> -17.9 <strong>(-0.213)</strong> </td>
+        <td style="background-color:rgb(244,244,250);color:black"> -0.00192 <strong>(-0.043)</strong> </td>
+        <td> 0.0416 </td>
+        <td style="background-color:rgb(248,248,250);color:black"> -0.00358 <strong>(-0.015)</strong> </td>
+    </tr>
+    <tr>
+        <th> tau </th>
+        <td style="background-color:rgb(247,247,250);color:black"> -4.91 <strong>(-0.022)</strong> </td>
+        <td style="background-color:rgb(250,249,249);color:black"> 2.97 <strong>(0.006)</strong> </td>
+        <td style="background-color:rgb(246,246,250);color:black"> -0.00839 <strong>(-0.033)</strong> </td>
+        <td style="background-color:rgb(248,248,250);color:black"> -0.00358 <strong>(-0.015)</strong> </td>
+        <td> 1.36 </td>
+    </tr>
+</table></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">truncnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np_m_sw</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">],</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">]),</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np_m_sw</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">])]</span>
+<span class="n">yields</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">],</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]]</span>
+
+<span class="n">V</span> <span class="o">=</span> <span class="n">compute_sweight_matrix</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">yields</span><span class="p">)</span>
+<span class="n">sWeights</span> <span class="o">=</span> <span class="n">compute_sweights</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">yields</span><span class="p">,</span> <span class="n">V</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;sWeights&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sWeights</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sum of the sWeights: &#39;</span><span class="p">,</span> <span class="n">sWeights</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="s1">&#39;match with the fit signal amount: &#39;</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Sum of the sWeights:  19909.62024027068 match with the fit signal amount:  19909.620240270702
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot the full lifetime distribution</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np_sig_t_sw</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;True signal&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;lifetime&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;sWeights&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Reconstructed signal&#39;</span><span class="p">)</span>
+<span class="c1"># Labels and title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;sWeighted counts&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_sPlot_47_0.png" src="../_images/notebooks_sPlot_47_0.png" />
+</div>
+</div>
+</section>
+<section id="Important-requirement-of-sPlot">
+<h2>Important requirement of sPlot<a class="headerlink" href="#Important-requirement-of-sPlot" title="Link to this heading"></a></h2>
+<p>Reconstructed control variables (i.e. lifetime, <span class="math notranslate nohighlight">\(p\)</span>) and discriminant variables (i.e. mass) should be statistically independent within each class. So you can not reconstruct variables that are correlated to the discriminant variable.</p>
+<p>As an example you can try to reconstruct the mass variable with sWeights (mass is correlated with mass):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot the full lifetime distribution</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;mass&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;sWeights&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Reconstructed signal&#39;</span><span class="p">)</span>
+<span class="c1"># Labels and title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;sWeighted counts&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_sPlot_50_0.png" src="../_images/notebooks_sPlot_50_0.png" />
+</div>
+</div>
+</section>
+<section id="Efficiency-corrected-yields">
+<h2>Efficiency corrected yields<a class="headerlink" href="#Efficiency-corrected-yields" title="Link to this heading"></a></h2>
+<p>The sPlot formalism can be applied also to extract physics results. One may be interested in a particular signal yield provided by the likelihood fit from a selection efficiency (<span class="math notranslate nohighlight">\(\epsilon(x)\)</span>).</p>
+<p>You can use the sum:</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\sum_{\text {events }} \frac{w_s^2(m)}{\epsilon(x)}
+\end{aligned}\]</div>
+<p>to compute the efficiency corrected yields.</p>
+<p>Useful links/papers: <a class="reference external" href="https://indico.cern.ch/event/940874/timetable/">https://indico.cern.ch/event/940874/timetable/</a> <a class="reference external" href="https://indico.cern.ch/event/940874/contributions/3953536/attachments/2127102/3581512/langenbruch.pdf">https://indico.cern.ch/event/940874/contributions/3953536/attachments/2127102/3581512/langenbruch.pdf</a> <a class="reference external" href="https://arxiv.org/pdf/1911.01303">https://arxiv.org/pdf/1911.01303</a> <a class="reference external" href="https://indico.cern.ch/event/940874/contributions/3953530/attachments/2127199/3581560/sweights_ms.pdf">https://indico.cern.ch/event/940874/contributions/3953530/attachments/2127199/3581560/sweights_ms.pdf</a> <a class="reference external" href="http://arogozhnikov.github.io/2015/10/07/splot.html">http://arogozhnikov.github.io/2015/10/07/splot.html</a> <a class="reference external" href="https://arxiv.org/pdf/physics/0402083">https://arxiv.org/pdf/physics/0402083</a> <a class="reference external" href="https://hsf-training.github.io/analysis-essentials/advanced-python/60sPlot.html">https://hsf-training.github.io/analysis-essentials/advanced-python/60sPlot.html</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="analysis_basics.html" class="btn btn-neutral float-left" title="Reading and processing LHCb data files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Monash LHCb.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
