@@ -18,3 +18,4 @@ Contents
    nectar
    usage
    api
+   tutorials
