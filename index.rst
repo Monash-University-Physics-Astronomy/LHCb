@@ -15,3 +15,4 @@ Contents
    Contributing
    usage
    api
+   tutorials
