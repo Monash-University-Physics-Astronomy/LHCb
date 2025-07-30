@@ -13,5 +13,6 @@ Contents
    lhcbregistration
    nectar
    Contributing
+   RemoteCodeDev
    usage
    api
