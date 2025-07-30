@@ -1,0 +1,238 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remote code development tips &mdash; Monash LHCb 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="Contributing" href="Contributing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Monash LHCb
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lhcbregistration.html">Registration in the LHCb collaboration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nectar.html">Nectar computing cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Remote code development tips</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#useful-ssh-configuration-options">Useful ssh configuration options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#x11-forwarding">X11 forwarding</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-and-installing-software">Accessing and installing software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lbconda">LbConda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lcgview">LCGView</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-jupyter-notebooks-on-a-remote-server">Running jupyter notebooks on a remote server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#from-the-command-line">From the command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#in-vscode">In VSCode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jupyter-notebooks-that-use-root">Jupyter notebooks that use ROOT</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Monash LHCb</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Remote code development tips</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/RemoteCodeDev.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="remote-code-development-tips">
+<h1>Remote code development tips<a class="headerlink" href="#remote-code-development-tips" title="Link to this heading"></a></h1>
+<section id="useful-ssh-configuration-options">
+<h2>Useful ssh configuration options<a class="headerlink" href="#useful-ssh-configuration-options" title="Link to this heading"></a></h2>
+<p>This section suggests some useful configuration options to consider placing in you <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file.</p>
+<section id="x11-forwarding">
+<h3>X11 forwarding<a class="headerlink" href="#x11-forwarding" title="Link to this heading"></a></h3>
+<p>It is possible to open graphical applications, e.g. an image/pdf viewer, on a remote server and have it displayed on your local screen.
+To do this, you must ensure X11 forwarding is enabled on your ssh connection either by using the <code class="docutils literal notranslate"><span class="pre">-X</span></code> option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">X</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;@&lt;</span><span class="n">remote_host</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Or by enabling it for all connections in your <code class="docutils literal notranslate"><span class="pre">.ssh/config</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="o">*</span>
+   <span class="n">ForwardX11</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="accessing-and-installing-software">
+<h2>Accessing and installing software<a class="headerlink" href="#accessing-and-installing-software" title="Link to this heading"></a></h2>
+<p>This is generally dependent on the specific remote server you are working on.</p>
+<p>In many cases, including the nectar and lxplus machines, most of the software required for LHCb data analysis purposes is available through CVMFS.</p>
+<p>There are two main ways to configure your environment to use CVMFS software.</p>
+<section id="lbconda">
+<h3>LbConda<a class="headerlink" href="#lbconda" title="Link to this heading"></a></h3>
+<p>LHCb provides wrapper scripts for accessing predefined conda environments installed in CVMFS.
+Run the LbEnv setup script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">lhcb</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">LbEnv</span>
+</pre></div>
+</div>
+<p>and then use the <code class="docutils literal notranslate"><span class="pre">lb-conda</span></code> command to run programs within a specified LbConda environment.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lb</span><span class="o">-</span><span class="n">conda</span> <span class="n">default</span> <span class="n">python</span>
+</pre></div>
+</div>
+<p>will launch python inside the <code class="docutils literal notranslate"><span class="pre">default</span></code> LbConda environment, which is usually the most recent release.
+A specific release can be obtained by replacing <code class="docutils literal notranslate"><span class="pre">default</span></code> with <code class="docutils literal notranslate"><span class="pre">default/&lt;version&gt;</span></code>.</p>
+<p>See <a class="reference external" href="https://gitlab.cern.ch/lhcb-core/lbcondawrappers/-/blob/master/README.md">here</a> for more information, including how to use the <code class="docutils literal notranslate"><span class="pre">lb-conda-dev</span> <span class="pre">virtual-env</span></code> command to allow installing additional python packages on top of the base environment.</p>
+</section>
+<section id="lcgview">
+<h3>LCGView<a class="headerlink" href="#lcgview" title="Link to this heading"></a></h3>
+<p>Choose a <code class="docutils literal notranslate"><span class="pre">platform</span></code> and <code class="docutils literal notranslate"><span class="pre">release</span></code> and then run the corresponding environment setup script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">sft</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">lcg</span><span class="o">/</span><span class="n">views</span><span class="o">/&lt;</span><span class="n">release</span><span class="o">&gt;/&lt;</span><span class="n">platform</span><span class="o">&gt;/</span><span class="n">setup</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>A list of available platforms/releases can be found <a class="reference external" href="https://lcginfo.cern.ch/">at this link</a>.</p>
+<p>To give a specific example,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">sft</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">lcg</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">setupViews</span><span class="o">.</span><span class="n">sh</span> <span class="n">LCG_105</span> <span class="n">x86_64</span><span class="o">-</span><span class="n">el9</span><span class="o">-</span><span class="n">gcc13</span><span class="o">-</span><span class="n">opt</span>
+</pre></div>
+</div>
+<p>The upside of LCGViews is that they fully configure your current environemnt, so you don’t need to run any additional commands like <code class="docutils literal notranslate"><span class="pre">lb-conda</span></code> at runtime.
+It is also easy if you need to install additional software on top of the base environment.
+You can, for example, create an ordianry python virtual environment after setting up the LCGView,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="o">&lt;</span><span class="n">my_env</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>and use <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> to install whatever additional python packages you might need.</p>
+</section>
+</section>
+<section id="running-jupyter-notebooks-on-a-remote-server">
+<h2>Running jupyter notebooks on a remote server<a class="headerlink" href="#running-jupyter-notebooks-on-a-remote-server" title="Link to this heading"></a></h2>
+<section id="from-the-command-line">
+<h3>From the command line<a class="headerlink" href="#from-the-command-line" title="Link to this heading"></a></h3>
+<p>You can run a jupyter notebook on the remote server and have it displayed in your local browser.</p>
+<p>To do this, use ssh with local port forwarding:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">L</span> <span class="mi">8000</span><span class="p">:</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8888</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;@&lt;</span><span class="n">remote_host</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>and then specifcy the same port to run the jupyter notebook on the remote server:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">browser</span> <span class="o">--</span><span class="n">port</span><span class="o">=</span><span class="mi">8888</span>
+</pre></div>
+</div>
+<p>Copy the link provided into your local browser and you should see the jupyter server running.</p>
+</section>
+<section id="in-vscode">
+<h3>In VSCode<a class="headerlink" href="#in-vscode" title="Link to this heading"></a></h3>
+<p>Jupyter notebooks can be run inside VSCode. All you have to do is select a kernel (usually near the top-right of the VSCode window).</p>
+<p>More info can be found <a class="reference external" href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks">here</a>.</p>
+<p>To use a custom environment, one may create python virtual environment or a conda environment with any required software and then simply select the python interpreter from that environemnt for the kernel.</p>
+<p>However, this method seems to fail if the notebook needs to use software such as ROOT from CVMFS pre-defined environments. A solution for this is explained below.</p>
+</section>
+<section id="jupyter-notebooks-that-use-root">
+<h3>Jupyter notebooks that use ROOT<a class="headerlink" href="#jupyter-notebooks-that-use-root" title="Link to this heading"></a></h3>
+<p>The command line method for running jupyter notebooks in a local browser should work with minimal modifications as long as you have ROOT installed and your environment is configured correctly.</p>
+<p>E.g. on nectar9, ROOT is available via CVMFS.
+If using LbConda, you first need to setup your environment using the LbEnv setup script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">lhcb</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">LbEnv</span>
+</pre></div>
+</div>
+<p>Note: this is probably already done by default in your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> configuration file.
+Then you need to run the notebook as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lb</span><span class="o">-</span><span class="n">conda</span> <span class="n">default</span> <span class="n">jupyter</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">browser</span> <span class="o">--</span><span class="n">port</span><span class="o">=</span><span class="mi">8888</span>
+</pre></div>
+</div>
+<p>to ensure that it runs inside the LbConda environment.</p>
+<p>If using an LCGView, you likewise need to setup the environment with the corresponding setup script. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">sft</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">lcg</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">setupViews</span><span class="o">.</span><span class="n">sh</span> <span class="n">LCG_105</span> <span class="n">x86_64</span><span class="o">-</span><span class="n">el9</span><span class="o">-</span><span class="n">gcc13</span><span class="o">-</span><span class="n">opt</span>
+</pre></div>
+</div>
+<p>In this case, the standard jupyter notebook command should work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">browser</span> <span class="o">--</span><span class="n">port</span><span class="o">=</span><span class="mi">8888</span>
+</pre></div>
+</div>
+<p>For running the notebook in VSCode, the most reliable method is in fact to start the jupyter server from the command line as above (modulo the port forwarding options).
+Once the server has started, copy the given URL.
+However, instead of pasting the URL into a web browser, paste it into the VSCode kernel selector.
+To do this, follow the same instructions as described earlier for the selecting a Jupyter kernel in VSCode, but instead of directly choosing an environment/interpreter, select “Existing Jupyter Server…” and paste the URL.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Contributing.html" class="btn btn-neutral float-left" title="Contributing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Monash LHCb.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
