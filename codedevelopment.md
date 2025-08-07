@@ -20,7 +20,11 @@ For a given project, you only need to do everything below once.
 
 LHCb has created an [Analysis Repository Skeleton](https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton) which provides a great place for you to start developing your code. When you eventually has to share your code with somebody else, then it becomes much easier if they see a familiar structure.
 1. Follow the instructions to [set up the repository](https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton#to-set-up-the-repository)
-2. [download a local copy](https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton#download-your-replica-project-locally). The commands in the last step should be executed in a terminal window on `nectar9`, see images. ![New terminal](images/new-terminal.png)![alt text](<Screenshot From 2025-08-07 17-06-56.png>) ![git clone in terminal](images/terminal-clone.png).
+2. [download a local copy](https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton#download-your-replica-project-locally). The commands in the last step should be executed in a terminal window on `nectar9`, see images. 
+
+![New terminal](images/new-terminal.png)! 
+
+![git clone in terminal](images/terminal-clone.png).
 3. You can ignore the rest of the instructions on the [Analysis Repository Skeleton](https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton) page now and come back to it later if required.
 4. To setup the python environment for coding, in a terminal window inside your skeleton directory set up a virtual environment that is based on the shared LHCb conda environment.
 ```
