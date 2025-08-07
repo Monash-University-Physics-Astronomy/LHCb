@@ -54,6 +54,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../tutorials.html#analysis-tools">Analysis tools</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#splots">sPlots</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">sPlot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#TL;DR">TL;DR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Tutorial-start">Tutorial start</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Toy-example:-extracting-the-lifetime-distribution-of-an-unstable-particle">Toy example: extracting the lifetime distribution of an unstable particle</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#The-sWeights-recipe">The sWeights recipe</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Toy-model">Toy model</a></li>
@@ -102,6 +104,93 @@
 <h1>sPlot<a class="headerlink" href="#sPlot" title="Link to this heading"></a></h1>
 <p>This notebook explains sPLot and how to compute the sWeights. The technique called sPlot, is able to unfold the contributions of the different sources for a given control variable. It relies on maximum likelihood fits to determine the yields of the various sources.</p>
 <p>Original paper: M. Pivk &amp; F. Le Diberder, arXiv:physics/0402083, NIMA 555 (2005) 356</p>
+<section id="TL;DR">
+<h2>TL;DR<a class="headerlink" href="#TL;DR" title="Link to this heading"></a></h2>
+<p>sPlot will use the fitted yield for each sources to derive the so-called sWeights for each data point:</p>
+<div class="math notranslate nohighlight">
+\[W_n(x)=\frac{\sum_{j=1}^{N_S} V_{n j} f_j(x)}{\sum_{k=1}^{N_S} N_k f_k(x)}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[V_{n j}^{-1}=\sum_{e=1}^N \frac{f_n\left(x_e\right) f_j\left(x_e\right)}{\left(\sum_{k=1}^{N_S} N_k f_k(x_e)\right)^2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(N_S\)</span> is the number of sources in the data sample, 2 if you have a signal and background source. The index <span class="math notranslate nohighlight">\(n\)</span> represents the source, for instance 0 is the signal and 1 is the background, then <span class="math notranslate nohighlight">\(f_0\)</span> and <span class="math notranslate nohighlight">\(N_0\)</span> are the pdf and yield for the signal respectively.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define sweights functions for each bin:</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_sweight_matrix</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">yields</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Compute the sWeight covariance matrix (V) for a set of sources.</span>
+
+<span class="sd">            This function calculates the sWeight covariance matrix (V) for a set of sources,</span>
+<span class="sd">            given the PDF values and yields for each source.</span>
+
+<span class="sd">            Parameters:</span>
+<span class="sd">            - values: 2D array-like (n_samples x n_sources)</span>
+<span class="sd">                    A matrix where each row corresponds to a sample, and each column corresponds</span>
+<span class="sd">                    to the PDF values for a particular source (e.g., signal, background, etc.).</span>
+<span class="sd">            - yields: 1D array-like (n_sources)</span>
+<span class="sd">                    An array containing the yields for each source.</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">            - V: 2D numpy array (n_sources x n_sources)</span>
+<span class="sd">                    The sWeight covariance matrix (V), which can be used to calculate sWeights</span>
+<span class="sd">                    for each source.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="c1"># Convert inputs to numpy arrays</span>
+            <span class="n">pdf_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+            <span class="n">yields_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">yields</span><span class="p">)</span>
+            <span class="c1"># Compute the total squared normalization term</span>
+            <span class="n">total_squared</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">yields_arr</span><span class="p">,</span> <span class="n">pdf_val</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+            <span class="c1"># Initialize the inverse covariance matrix (V_inv)</span>
+            <span class="n">V_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">yields</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">yields</span><span class="p">)))</span>
+
+            <span class="c1"># Compute the elements of V_inv</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yields</span><span class="p">)):</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yields</span><span class="p">)):</span>
+                            <span class="n">V_inv</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pdf_val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_squared</span><span class="p">,</span> <span class="n">pdf_val</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+            <span class="c1"># Compute the covariance matrix V by inverting V_inv</span>
+            <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">V_inv</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">V</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_sweights</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">yields</span><span class="p">,</span> <span class="n">V</span><span class="p">):</span> <span class="c1"># with V already worked out</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute sWeights for an arbitrary number of sources.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - values: A 2D array (n_samples x n_sources) of PDF values for each source.</span>
+<span class="sd">    - yields: A 1D array (n_sources) of yields for each source.</span>
+<span class="sd">    - V: The covariance matrix (n_sources x n_sources).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - sWeights: A 2D array (n_samples x n_sources) where each column contains the sWeights for a source.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pdf_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="c1"># Shape: (n_sources, n_samples)</span>
+    <span class="n">yields_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">yields</span><span class="p">)</span>  <span class="c1"># Shape: (n_sources,)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>  <span class="c1"># Shape: (n_sources, n_sources)</span>
+
+    <span class="c1"># Compute the total sum for normalization</span>
+    <span class="n">total_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">yields_arr</span><span class="p">,</span> <span class="n">pdf_val</span><span class="p">)</span>  <span class="c1"># Shape: (n_samples,)</span>
+
+    <span class="c1"># Compute sWeights for each source</span>
+    <span class="n">sweights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">pdf_val</span><span class="p">)</span>  <span class="c1"># Initialize array to store sWeights</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>  <span class="c1"># Iterate over sources</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="n">sweights</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">sweights</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">pdf_val</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">sweights</span><span class="o">/</span><span class="n">total_sum</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Tutorial-start">
+<h2>Tutorial start<a class="headerlink" href="#Tutorial-start" title="Link to this heading"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -205,6 +294,7 @@
 </pre></div>
 </div>
 </div>
+</section>
 <section id="Toy-example:-extracting-the-lifetime-distribution-of-an-unstable-particle">
 <h2>Toy example: extracting the lifetime distribution of an unstable particle<a class="headerlink" href="#Toy-example:-extracting-the-lifetime-distribution-of-an-unstable-particle" title="Link to this heading"></a></h2>
 <p>If a data sample is populated by different sources of events, like signal and background (e.g. Combinatorial), sPlot is able to unfold the contributions of different sourcess for a given variable. Let’s construct a dataset with two variables, the invariant mass (<span class="math notranslate nohighlight">\(m\)</span>) and lifetime (<span class="math notranslate nohighlight">\(t\)</span>).</p>
@@ -236,7 +326,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_sPlot_6_0.png" src="../_images/notebooks_sPlot_6_0.png" />
+<img alt="../_images/notebooks_sPlot_10_0.png" src="../_images/notebooks_sPlot_10_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -367,7 +457,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_sPlot_9_0.png" src="../_images/notebooks_sPlot_9_0.png" />
+<img alt="../_images/notebooks_sPlot_13_0.png" src="../_images/notebooks_sPlot_13_0.png" />
 </div>
 </div>
 <p>Data model in discriminant variable Mass (<span class="math notranslate nohighlight">\(m\)</span>) and control variable Lifetime (<span class="math notranslate nohighlight">\(t\)</span>)</p>
@@ -616,7 +706,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_sPlot_18_0.png" src="../_images/notebooks_sPlot_18_0.png" />
+<img alt="../_images/notebooks_sPlot_22_0.png" src="../_images/notebooks_sPlot_22_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -663,7 +753,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_sPlot_21_0.png" src="../_images/notebooks_sPlot_21_0.png" />
+<img alt="../_images/notebooks_sPlot_25_0.png" src="../_images/notebooks_sPlot_25_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -688,7 +778,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_sPlot_22_0.png" src="../_images/notebooks_sPlot_22_0.png" />
+<img alt="../_images/notebooks_sPlot_26_0.png" src="../_images/notebooks_sPlot_26_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -713,7 +803,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_sPlot_23_0.png" src="../_images/notebooks_sPlot_23_0.png" />
+<img alt="../_images/notebooks_sPlot_27_0.png" src="../_images/notebooks_sPlot_27_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -738,7 +828,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_sPlot_24_0.png" src="../_images/notebooks_sPlot_24_0.png" />
+<img alt="../_images/notebooks_sPlot_28_0.png" src="../_images/notebooks_sPlot_28_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1116,7 +1206,7 @@ Sum of the sWeights:  19909.62024027068 match with the fit signal amount:  19909
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_sPlot_47_0.png" src="../_images/notebooks_sPlot_47_0.png" />
+<img alt="../_images/notebooks_sPlot_51_0.png" src="../_images/notebooks_sPlot_51_0.png" />
 </div>
 </div>
 </section>
@@ -1145,7 +1235,7 @@ Sum of the sWeights:  19909.62024027068 match with the fit signal amount:  19909
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_sPlot_50_0.png" src="../_images/notebooks_sPlot_50_0.png" />
+<img alt="../_images/notebooks_sPlot_54_0.png" src="../_images/notebooks_sPlot_54_0.png" />
 </div>
 </div>
 </section>
