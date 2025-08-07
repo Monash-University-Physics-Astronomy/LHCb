@@ -38,10 +38,3 @@ On the `nectar` cluster you have a home directory at `/home/<user>`. You are the
 
 Be aware that there is **no backup** and **no undo** of files you delete, or indeed everything if there is a disk failure. For code, you should use GitHub/Gitlab or similar to track your changes and for data, it should either be available elsewhere or should be relatively easy to recreate.
 
-## Code development
-By far the easiest way to work on the remote `nectar` cluster is to install [Visual Studio Code](https://code.visualstudio.com/) on your laptop. Once installed and started, install the extension [Remote - SSH](https://code.visualstudio.com/docs/remote/ssh). Just search for it in the extensions and shown below, click on it and install.
-  
-![Remote - SSH extension in VS Code](images/remote-ssh.png)
-
-You can now connect to the `nectar` cluster by clicking on the small set of arrows in the very bottom left of the VSC widow, then select `Connect to Host ...` and pick `nectar9` from the list. If `nectar9` is not in the list, something has been missed in the [section on obtaining an account](#obtain-an-account). The first time you connect, you might have to pick `linux` as the type for the remote.
-
