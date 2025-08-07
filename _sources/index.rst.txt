@@ -13,4 +13,5 @@ Contents
    lhcbregistration
    nectar
    codedevelopment
+   tutorials
    Contributing
