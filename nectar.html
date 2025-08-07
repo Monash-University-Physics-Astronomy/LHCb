@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Contributing" href="Contributing.html" />
+    <link rel="next" title="Code development" href="codedevelopment.html" />
     <link rel="prev" title="Registration in the LHCb collaboration" href="lhcbregistration.html" /> 
 </head>
 
@@ -48,9 +48,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#obtain-an-account">Obtain an account</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#test-account">Test account</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disk-space">Disk space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#code-development">Code development</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="codedevelopment.html">Code development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
 </ul>
 
@@ -118,12 +118,6 @@ Host frontend
 <p>On the <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster you have a home directory at <code class="docutils literal notranslate"><span class="pre">/home/&lt;user&gt;</span></code>. You are the only one who can read content in that directory. To share data with other users, create a directory below <code class="docutils literal notranslate"><span class="pre">/shared</span></code> that has an explaining name. Everybody on the cluster will have access to those files.</p>
 <p>Be aware that there is <strong>no backup</strong> and <strong>no undo</strong> of files you delete, or indeed everything if there is a disk failure. For code, you should use GitHub/Gitlab or similar to track your changes and for data, it should either be available elsewhere or should be relatively easy to recreate.</p>
 </section>
-<section id="code-development">
-<h2>Code development<a class="headerlink" href="#code-development" title="Link to this heading"></a></h2>
-<p>By far the easiest way to work on the remote <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster is to install <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> on your laptop. Once installed and started, install the extension <a class="reference external" href="https://code.visualstudio.com/docs/remote/ssh">Remote - SSH</a>. Just search for it in the extensions and shown below, click on it and install.</p>
-<p><img alt="Remote - SSH extension in VS Code" src="_images/remote-ssh.png" /></p>
-<p>You can now connect to the <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster by clicking on the small set of arrows in the very bottom left of the VSC widow, then select <code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">to</span> <span class="pre">Host</span> <span class="pre">...</span></code> and pick <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> from the list. If <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> is not in the list, something has been missed in the <a class="reference internal" href="#obtain-an-account"><span class="xref myst">section on obtaining an account</span></a>. The first time you connect, you might have to pick <code class="docutils literal notranslate"><span class="pre">linux</span></code> as the type for the remote.</p>
-</section>
 </section>
 
 
@@ -131,7 +125,7 @@ Host frontend
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="lhcbregistration.html" class="btn btn-neutral float-left" title="Registration in the LHCb collaboration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="codedevelopment.html" class="btn btn-neutral float-right" title="Code development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
