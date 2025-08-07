@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="next" title="Code development" href="codedevelopment.html" />
     <link rel="prev" title="Registration in the LHCb collaboration" href="lhcbregistration.html" /> 
 </head>
 
@@ -47,13 +47,13 @@
 <li class="toctree-l1"><a class="reference internal" href="lhcbregistration.html">Registration in the LHCb collaboration</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Nectar computing cluster</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#obtain-an-account">Obtain an account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-account">Test account</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disk-space">Disk space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#code-development">Code development</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codedevelopment.html">Code development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
 </ul>
 
         </div>
@@ -102,22 +102,23 @@ Host frontend
 </pre></div>
 </div>
 <p>where you replace <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> with the username you are given and <code class="docutils literal notranslate"><span class="pre">&lt;keyfile&gt;</span></code> is the name of the file that doesn’t have the <code class="docutils literal notranslate"><span class="pre">.pub</span></code> extension.</p>
+</section>
+<section id="test-account">
+<h2>Test account<a class="headerlink" href="#test-account" title="Link to this heading"></a></h2>
 <p>Now from the terminal (command) window try</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>nectar9
 </pre></div>
 </div>
-<p>and confirm that it logs you in. If it doesn’t work, ask for help.</p>
+<p>and confirm that it logs you in. If it doesn’t work, do</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-vvv<span class="w"> </span>nectar9
+</pre></div>
+</div>
+<p>ask for help, including the output of the last command.</p>
 </section>
 <section id="disk-space">
 <h2>Disk space<a class="headerlink" href="#disk-space" title="Link to this heading"></a></h2>
-<p>On the <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster you have a home directory at <code class="docutils literal notranslate"><span class="pre">/home/&lt;user&gt;</span></code>. You are the only one who can read content in that directory. To share data with other users, create a directory below <code class="docutils literal notranslate"><span class="pre">/shared</span></code> that has an explaining name. Everybody on the cluster will hav access to those files.</p>
+<p>On the <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster you have a home directory at <code class="docutils literal notranslate"><span class="pre">/home/&lt;user&gt;</span></code>. You are the only one who can read content in that directory. To share data with other users, create a directory below <code class="docutils literal notranslate"><span class="pre">/shared</span></code> that has an explaining name. Everybody on the cluster will have access to those files.</p>
 <p>Be aware that there is <strong>no backup</strong> and <strong>no undo</strong> of files you delete, or indeed everything if there is a disk failure. For code, you should use GitHub/Gitlab or similar to track your changes and for data, it should either be available elsewhere or should be relatively easy to recreate.</p>
-</section>
-<section id="code-development">
-<h2>Code development<a class="headerlink" href="#code-development" title="Link to this heading"></a></h2>
-<p>By far the easiest way to work on the remote <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster is to install <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> on your laptop. Once installed and started, install the extension <a class="reference external" href="https://code.visualstudio.com/docs/remote/ssh">Remote - SSH</a>. Just search for it in the extensions and shown below, click on it and install.</p>
-<p><img alt="Remote - SSH extension in VS Code" src="_images/remote-ssh.png" /></p>
-<p>You can now connect to the <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster by clicking on the small set of arrows in the very bottom left of the VSC widow.</p>
 </section>
 </section>
 
@@ -126,7 +127,7 @@ Host frontend
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="lhcbregistration.html" class="btn btn-neutral float-left" title="Registration in the LHCb collaboration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="codedevelopment.html" class="btn btn-neutral float-right" title="Code development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
