@@ -13,5 +13,3 @@ Contents
    lhcbregistration
    nectar
    Contributing
-   usage
-   api

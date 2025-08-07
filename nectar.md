@@ -22,6 +22,7 @@ Host frontend
 ```
 where you replace `<user>` with the username you are given and `<keyfile>` is the name of the file that doesn't have the `.pub` extension.
 
+## Test account
 Now from the terminal (command) window try
 ```bash
 ssh nectar9
@@ -42,5 +43,5 @@ By far the easiest way to work on the remote `nectar` cluster is to install [Vis
   
 ![Remote - SSH extension in VS Code](images/remote-ssh.png)
 
-You can now connect to the `nectar` cluster by clicking on the small set of arrows in the very bottom left of the VSC widow.
+You can now connect to the `nectar` cluster by clicking on the small set of arrows in the very bottom left of the VSC widow, then select `Connect to Host ...` and pick `nectar9` from the list. If `nectar9` is not in the list, something has been missed in the [section on obtaining an account](#obtain-an-account). The first time you connect, you might have to pick `linux` as the type for the remote.
 
