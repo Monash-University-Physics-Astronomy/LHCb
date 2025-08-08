@@ -1,0 +1,192 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code development &mdash; Monash LHCb 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorials" href="tutorials.html" />
+    <link rel="prev" title="Nectar computing cluster" href="nectar.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Monash LHCb
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lhcbregistration.html">Registration in the LHCb collaboration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nectar.html">Nectar computing cluster</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Code development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#development-environment">Development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup-your-coding-area">Setup your coding area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#edit-and-run-a-jupyter-notebook">Edit and run a Jupyter notebook</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Monash LHCb</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Code development</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/codedevelopment.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="code-development">
+<h1>Code development<a class="headerlink" href="#code-development" title="Link to this heading"></a></h1>
+<section id="development-environment">
+<h2>Development environment<a class="headerlink" href="#development-environment" title="Link to this heading"></a></h2>
+<p>By far the easiest way to work on the remote <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster is to install <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> on your laptop. It is available for Windows, Mac, Linux.</p>
+<p>Once installed and started, go down to extensions and install <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">Remote - SSH</a>,  <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python</a> and <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter">Jupyter</a>
+Just search for the names in the extension tab as shown below, click on it and install.</p>
+<p><img alt="Remote - SSH extension in VS Code" src="_images/remote-ssh.png" /></p>
+<blockquote>
+<div><p><strong>Note:</strong><br />
+As always be careful when you install software. Check that all the etension above have the <code class="docutils literal notranslate"><span class="pre">microsoft.com</span></code> badge on them before you click install. For other extensions do your due diligence. Do they have millions of installations, is it a case of typo squatting, read the reviews!</p>
+</div></blockquote>
+<p>After installing the extensions, you can now connect to the <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster by clicking on the small set of arrows in the very bottom left of the window, then select <code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">to</span> <span class="pre">Host</span> <span class="pre">...</span></code> and pick <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> from the list. It should now open a new window where you now work on the remote <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> machine. If <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> is not in the list, something has been missed in the section on obtaining an account. The first time you connect, you might have to pick <code class="docutils literal notranslate"><span class="pre">linux</span></code> as the type for the remote.</p>
+<p><img alt="Remote - connect" src="_images/connect-ssh.png" /> <img alt="Connect to host" src="_images/connect-to-host.png" />.</p>
+</section>
+<section id="setup-your-coding-area">
+<h2>Setup your coding area<a class="headerlink" href="#setup-your-coding-area" title="Link to this heading"></a></h2>
+<p>For a given project, you only need to do everything below once.</p>
+<p>LHCb has created an <a class="reference external" href="https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton">Analysis Repository Skeleton</a> which provides a great place for you to start developing your code. When you eventually has to share your code with somebody else, then it becomes much easier if they see a familiar structure.</p>
+<ol class="arabic simple">
+<li><p>Follow the instructions to <a class="reference external" href="https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton#to-set-up-the-repository">set up the repository</a></p></li>
+<li><p><a class="reference external" href="https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton#download-your-replica-project-locally">download a local copy</a>. The commands in the last step should be executed in a terminal window on <code class="docutils literal notranslate"><span class="pre">nectar9</span></code>, see images.
+<img alt="New terminal" src="_images/new-terminal.png" />!
+<img alt="git clone in terminal" src="_images/terminal-clone.png" />.</p></li>
+<li><p>You can ignore the rest of the instructions on the <a class="reference external" href="https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton">Analysis Repository Skeleton</a> page for now and come back to it later if required.</p></li>
+<li><p>To setup the python environment for coding, in a terminal window set up a virtual environment that is based on the shared LHCb conda environment. See the command below and make changes in the folder name if required. Take care of including the single quotation marks.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>nectar9<span class="o">]</span><span class="w"> </span>~<span class="w"> </span>%<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>analysis-repo-skeleton
+<span class="o">[</span>nectar9<span class="o">]</span><span class="w"> </span>~/analysis-repo-skeleton<span class="w"> </span>master<span class="w">  </span><span class="m">1</span>%<span class="w"> </span>./run<span class="w"> </span>lb-conda-dev<span class="w"> </span>virtual-env<span class="w"> </span><span class="s1">&#39;$LBCONDA_DEFAULT_ENV_VERSION&#39;</span><span class="w"> </span>lb-python
+Environment<span class="w"> </span>created<span class="w"> </span><span class="k">in</span><span class="w"> </span>/home/egede/analysis-repo-skeleton/lb-python
+<span class="w">   </span>Execute<span class="w"> </span><span class="s2">&quot;/home/egede/analysis-repo-skeleton/lb-python/run&quot;</span><span class="w"> </span>to<span class="w"> </span>launch<span class="w"> </span>a<span class="w"> </span>shell<span class="w"> </span>inside<span class="w"> </span>the<span class="w"> </span>environment
+<span class="w">   </span>Execute<span class="w"> </span><span class="s2">&quot;/home/egede/analysis-repo-skeleton/lb-python/run my_command&quot;</span><span class="w"> </span>to<span class="w"> </span>launch<span class="w"> </span><span class="s2">&quot;my_command&quot;</span><span class="w"> </span>inside<span class="w"> </span>the<span class="w"> </span>environment
+<span class="o">[</span>nectar9<span class="o">]</span><span class="w"> </span>~/analysis-repo-skeleton<span class="w"> </span>master<span class="w"> </span>%<span class="w"> </span>lb-python/run<span class="w"> </span>printenv<span class="w"> </span>&gt;<span class="w"> </span>.env
+<span class="o">[</span>nectar9<span class="o">]</span><span class="w"> </span>~/analysis-repo-skeleton<span class="w"> </span>master<span class="w"> </span>%<span class="w"> </span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Now in the MVC window open the skeleton folder <img alt="open folder" src="_images/open-folder.png" />.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">ctrl-shift-p</span></code> and at the prompt type <code class="docutils literal notranslate"><span class="pre">Python:</span> <span class="pre">Select</span> <span class="pre">Interpreter</span></code> and then pick the line that has <code class="docutils literal notranslate"><span class="pre">lb-python</span></code> in it.</p></li>
+</ol>
+<blockquote>
+<div><p><strong>Note:</strong><br />
+If you do not yet have a computing account at CERN, you should just ignore step 1 above and in step 2, replace the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> command with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">gitlab</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">lhcb</span><span class="o">-</span><span class="n">dpa</span><span class="o">/</span><span class="n">wp6</span><span class="o">-</span><span class="n">analysis</span><span class="o">-</span><span class="n">preservation</span><span class="o">-</span><span class="ow">and</span><span class="o">-</span><span class="nb">open</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">analysis</span><span class="o">-</span><span class="n">repo</span><span class="o">-</span><span class="n">skeleton</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="edit-and-run-a-jupyter-notebook">
+<h2>Edit and run a Jupyter notebook<a class="headerlink" href="#edit-and-run-a-jupyter-notebook" title="Link to this heading"></a></h2>
+<p>To edit a Jupyter notebook, create a new file with the extension <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> in the <code class="docutils literal notranslate"><span class="pre">python</span></code> folder inside your skeleton project. To select the kernel, pick <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">environments</span></code> and then the <code class="docutils literal notranslate"><span class="pre">lb-python</span></code> option. You can try the following script. If it runs and produce a histogram, everything is good.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ROOT</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Generate random numbers</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Create a ROOT histogram</span>
+<span class="n">hist</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TH1F</span><span class="p">(</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="s2">&quot;Random Numbers Histogram&quot;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Fill the histogram</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">hist</span><span class="o">.</span><span class="n">Fill</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<span class="c1"># Draw the histogram</span>
+<span class="n">canvas</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;canvas&quot;</span><span class="p">,</span> <span class="s2">&quot;Canvas&quot;</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">hist</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+<span class="n">canvas</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you see red wiggly lines under the packages that you import, you might have done something wrong with setting up the environment or with selecting the kernel.</p>
+<blockquote>
+<div><p><strong>Note:</strong><br />
+You might get a timeout when starting the Jupyter kernel. This is because software is installed on demand from CERN and this can take a few minutes. Just click on run again (maybe a few times) and it should eventually work. For the same reason the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">ROOT</span></code> line might take several minutes the very first time you use it.</p>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nectar.html" class="btn btn-neutral float-left" title="Nectar computing cluster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Monash LHCb.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
