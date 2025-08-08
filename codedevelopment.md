@@ -23,10 +23,16 @@ LHCb has created an [Analysis Repository Skeleton](https://gitlab.cern.ch/lhcb-d
 2. [download a local copy](https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton#download-your-replica-project-locally). The commands in the last step should be executed in a terminal window on `nectar9`, see images. 
 ![New terminal](images/new-terminal.png)! 
 ![git clone in terminal](images/terminal-clone.png).
-3. You can ignore the rest of the instructions on the [Analysis Repository Skeleton](https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton) page now and come back to it later if required.
-4. To setup the python environment for coding, in a terminal window inside your skeleton directory set up a virtual environment that is based on the shared LHCb conda environment.
-```
-lb-conda-dev virtual-env default/2025-07-31 lb-python
+3. You can ignore the rest of the instructions on the [Analysis Repository Skeleton](https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton) page for now and come back to it later if required.
+4. To setup the python environment for coding, in a terminal window set up a virtual environment that is based on the shared LHCb conda environment. See the command below and make changes in the folder name if required. Take care of including the single quotation marks.
+```bash
+[nectar9] ~ % cd analysis-repo-skeleton
+[nectar9] ~/analysis-repo-skeleton master  1% ./run lb-conda-dev virtual-env '$LBCONDA_DEFAULT_ENV_VERSION' lb-python
+Environment created in /home/egede/analysis-repo-skeleton/lb-python
+   Execute "/home/egede/analysis-repo-skeleton/lb-python/run" to launch a shell inside the environment
+   Execute "/home/egede/analysis-repo-skeleton/lb-python/run my_command" to launch "my_command" inside the environment
+[nectar9] ~/analysis-repo-skeleton master % lb-python/run printenv > .env
+[nectar9] ~/analysis-repo-skeleton master % 
 ```
 5. Now in the MVC window open the skeleton folder ![open folder](images/open-folder.png).
 6. Type `ctrl-shift-p` and at the prompt type `Python: Select Interpreter` and then pick the line that has `lb-python` in it.
@@ -58,3 +64,6 @@ hist.Draw()
 canvas.Draw()
 ```
 If you see red wiggly lines under the packages that you import, you might have done something wrong with setting up the environment or with selecting the kernel.
+
+> **Note:**  
+> You might get a timeout when starting the Jupyter kernel. This is because software is installed on demand from CERN and this can take a few minutes. Just click on run again (maybe a few times) and it should eventually work. For the same reason the `import ROOT` line might take several minutes the very first time you use it.
