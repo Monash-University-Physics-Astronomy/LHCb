@@ -24,7 +24,7 @@ LHCb has created an [Analysis Repository Skeleton](https://gitlab.cern.ch/lhcb-d
 ![New terminal](images/new-terminal.png)! 
 ![git clone in terminal](images/terminal-clone.png).
 3. You can ignore the rest of the instructions on the [Analysis Repository Skeleton](https://gitlab.cern.ch/lhcb-dpa/wp6-analysis-preservation-and-open-data/analysis-repo-skeleton) page for now and come back to it later if required.
-4. To setup the python environment for coding, in a terminal window set up a virtual environment that is based on the shared LHCb conda environment. See the command below and make changes in the folder name if required. Take care of including the single quotation marks.
+4. To setup the python environment for coding, in a terminal window set up a virtual environment that is based on the shared LHCb conda environment. See the commands below and make changes in the folder name if required. Take care of including the single quotation marks.
 ```bash
 [nectar9] ~ % cd analysis-repo-skeleton
 [nectar9] ~/analysis-repo-skeleton master  1% ./run lb-conda-dev virtual-env '$LBCONDA_DEFAULT_ENV_VERSION' lb-python
@@ -63,7 +63,7 @@ canvas = ROOT.TCanvas("canvas", "Canvas", 800, 600)
 hist.Draw()
 canvas.Draw()
 ```
-If you see red wiggly lines under the packages that you import, you might have done something wrong with setting up the environment or with selecting the kernel.
+If you see red wiggly lines under the packages that you import, you might have done something wrong with setting up the environment or with selecting the kernel. If you when you run `import ROOT` see an error like `ERROR in cling::CIFactory::createCI()` you have also done something wrong in setting up the environment. You will need to fix this, even if things look like they work.
 
 > **Note:**  
 > You might get a timeout when starting the Jupyter kernel. This is because software is installed on demand from CERN and this can take a few minutes. Just click on run again (maybe a few times) and it should eventually work. For the same reason the `import ROOT` line might take several minutes the very first time you use it.
