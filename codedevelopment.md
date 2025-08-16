@@ -67,3 +67,10 @@ If you see red wiggly lines under the packages that you import, you might have d
 
 > **Note:**  
 > You might get a timeout when starting the Jupyter kernel. This is because software is installed on demand from CERN and this can take a few minutes. Just click on run again (maybe a few times) and it should eventually work. For the same reason the `import ROOT` line might take several minutes the very first time you use it.
+
+## GitHub Copilot
+One of the nicer extensions to install on your [Visual Studio Code](https://code.visualstudio.com/) is the [GitHub Copilot](https://code.visualstudio.com/docs/copilot/overview) extension. This is an AI peer programming tool that can help you to write code faster, and assist in coding tasks such as generating plots.  Starting off you will be on the free plan, though through [GitHub Education](https://github.com/education) students and staff are able to get the Pro plan, which comes with helpfull [features](https://docs.github.com/en/get-started/learning-about-github/githubs-plans#github-pro). 
+
+To start this process you must first install GitHub Copilot on your VSCode:
+
+![Remote - SSH extension in VS Code](images/remote-ssh.png)
