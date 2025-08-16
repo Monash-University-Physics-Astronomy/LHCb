@@ -81,7 +81,7 @@ To then access the Pro plan you will have to have a [GitHub]((https://code.visua
 
 Back on your VSCode, you should be able to see an icon for managing your Copilot usage in the bottom right hand corner:
 
-![Remote - SSH extension in VS Code](images/GitHub-Copilot-Approval.png)
+![Remote - SSH extension in VS Code](images/GitHub-Copilot-VSCode.png)
 
 This is where you can login, and once this is completed you should be able to see you are on the premium plan. To the right of the search bar, you should also be able to see the GitHub copilot icon. Here you can make a prompt to see an AI response. The AI is allowed to see your full directory structure and able to make folders/files. It can not make folders/files on the nectar machine. When on a python script or a jupyter notebook, another helpful tool is found by pressing `ctrl+i`. This will create a chat prompt which can alter the current document you are working on. You must either accept or cancel the changes.
 
