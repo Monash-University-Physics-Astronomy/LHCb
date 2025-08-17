@@ -67,3 +67,22 @@ If you see red wiggly lines under the packages that you import, you might have d
 
 > **Note:**  
 > You might get a timeout when starting the Jupyter kernel. This is because software is installed on demand from CERN and this can take a few minutes. Just click on run again (maybe a few times) and it should eventually work. For the same reason the `import ROOT` line might take several minutes the very first time you use it.
+
+## GitHub Copilot
+One of the nicer extensions to install on your [Visual Studio Code](https://code.visualstudio.com/) is the [GitHub Copilot](https://code.visualstudio.com/docs/copilot/overview) extension. This is an AI peer programming tool that can help you to write code faster, and assist in coding tasks such as generating plots.  Starting off you will be on the free plan, though through [GitHub Education](https://github.com/education) students and staff are able to get the Pro plan for **free**, which comes with helpfull [features](https://docs.github.com/en/get-started/learning-about-github/githubs-plans#github-pro). 
+
+To start this process you must first install GitHub Copilot on your VSCode:
+
+![Remote - SSH extension in VS Code](images/GitHub-Copilot.png)
+
+To then access the Pro plan you will have to have a [GitHub](https://code.visualstudio.com/docs/copilot/overview) account which is linked to your Monash account, and proceed to the following [link](https://github.com/settings/education/benefits). From here you must press the 'Start an application' button and proceed as either a student or educator. You will have to provide evidence that you are in fact student or educator, and for students a picture of your transcript from [wes](https://my.monash.edu/wes/) will work. For staff, a picture from your letter of employment should work as well. There are other pieces of evidence you could also use as proof, but these are the ones that are known to work. If you are denied it will provide reason(s) it was denied and you are able to start another application again, this must be with a different image (you will have to screenshot your evidence again). Common reason(s) for being denied is simply not completing information GitHub requires and also not having two-factor authentication. The approval time takes ~1 minute, and once you are approved you should be able to see the following:
+
+![Remote - SSH extension in VS Code](images/GitHub-Copilot-Approval.png)
+
+Back on your VSCode, you should be able to see an icon for managing your Copilot usage in the bottom right hand corner:
+
+![Remote - SSH extension in VS Code](images/GitHub-Copilot-VSCode.png)
+
+This is where you can login, and once this is completed you should be able to see you are on the premium plan. To the right of the search bar, you should also be able to see the GitHub copilot icon. Here you can make a prompt to see an AI response. The AI is allowed to see your full directory structure and able to make folders/files. It can not make folders/files on the nectar machine. When on a python script or a jupyter notebook, another helpful tool is found by pressing `ctrl+i`. This will create a chat prompt which can alter the current document you are working on. You must either accept or cancel the changes.
+
+
