@@ -51,6 +51,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#setup-your-coding-area">Setup your coding area</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#edit-and-run-a-jupyter-notebook">Edit and run a Jupyter notebook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#github-copilot">GitHub Copilot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connect-to-cern">Connect to CERN</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
@@ -167,6 +168,40 @@ You might get a timeout when starting the Jupyter kernel. This is because softwa
 <p>Back on your VSCode, you should be able to see an icon for managing your Copilot usage in the bottom right hand corner:</p>
 <p><img alt="Remote - SSH extension in VS Code" src="_images/GitHub-Copilot-VSCode.png" /></p>
 <p>This is where you can login, and once this is completed you should be able to see you are on the premium plan. To the right of the search bar, you should also be able to see the GitHub copilot icon. Here you can make a prompt to see an AI response. The AI is allowed to see your full directory structure and able to make folders/files. It can not make folders/files on the nectar machine. When on a python script or a jupyter notebook, another helpful tool is found by pressing <code class="docutils literal notranslate"><span class="pre">ctrl+i</span></code>. This will create a chat prompt which can alter the current document you are working on. You must either accept or cancel the changes.</p>
+</section>
+<section id="connect-to-cern">
+<h2>Connect to CERN<a class="headerlink" href="#connect-to-cern" title="Link to this heading"></a></h2>
+<p>The setup of the <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> cluster here in Australia and the <code class="docutils literal notranslate"><span class="pre">lxplus</span></code> cluster at CERN are in principle identical. In general you are better off using the <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> cluster as you avoid the very long round-trip time for the connection to CERN (it is about 300ms while it is about 5ms for <code class="docutils literal notranslate"><span class="pre">nectar9</span></code>) that can make interactive work very painful. Nevertheless if you are reading data from the <code class="docutils literal notranslate"><span class="pre">/eos</span></code> filesystem at CERN it might be easier to do something on <code class="docutils literal notranslate"><span class="pre">lxplus</span></code>.</p>
+<p>To connect by <code class="docutils literal notranslate"><span class="pre">ssh</span></code> to <code class="docutils literal notranslate"><span class="pre">lxplus.cern.ch</span></code> you can’t use a public key as you need to type your password to obtain write access to your home directory. The best is to add something like the lines below to your <code class="docutils literal notranslate"><span class="pre">.ssh/config</span></code> file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure that you only need to type your password and 2FA once if you have parallel logins</span>
+<span class="n">Host</span> <span class="n">lxplus</span>
+   <span class="n">HostName</span> <span class="n">lxplus</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span>
+   <span class="n">ControlPath</span> <span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">user</span><span class="o">/%</span><span class="n">i</span><span class="o">/%</span><span class="n">r</span><span class="o">@%</span><span class="n">h</span><span class="p">:</span><span class="o">%</span><span class="n">p</span>
+   <span class="n">ControlMaster</span> <span class="n">auto</span>
+
+<span class="c1"># Make sure that you can still use Gitlab at CERN with a key.</span>
+<span class="n">Host</span> <span class="n">gitlab</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span>
+   <span class="n">IdentityFile</span> <span class="o">&lt;</span><span class="n">CERN</span><span class="o">-</span><span class="n">Gitlab</span><span class="o">-</span><span class="n">key</span><span class="o">&gt;</span>
+   <span class="n">StrictHostKeyChecking</span> <span class="n">no</span>
+   <span class="n">PubkeyAuthentication</span> <span class="n">yes</span>
+   <span class="n">GSSAPIAuthentication</span> <span class="n">no</span>
+   <span class="n">GSSAPIDelegateCredentials</span> <span class="n">no</span>
+   <span class="n">ForwardAgent</span> <span class="n">no</span>
+   <span class="n">ForwardX11</span> <span class="n">no</span>
+   <span class="n">ForwardX11Trusted</span> <span class="n">no</span>
+
+<span class="n">Host</span> <span class="o">*.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span>
+   <span class="n">User</span> <span class="o">&lt;</span><span class="n">user</span><span class="o">&gt;</span>
+   <span class="n">PubkeyAuthentication</span> <span class="n">no</span>
+   <span class="n">PasswordAuthentication</span> <span class="n">yes</span>
+   <span class="n">GSSAPIAuthentication</span> <span class="n">no</span>
+   <span class="n">GSSAPIDelegateCredentials</span> <span class="n">no</span>
+   <span class="n">CheckHostIP</span> <span class="n">no</span>
+   <span class="n">ControlPersist</span> <span class="mi">1</span><span class="n">m</span>
+</pre></div>
+</div>
+<p>where you should substitute in your CERN username instead of <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;CERN-Gitlab-key&gt;</span></code> with the ssh public key you have uploaded to the CERN Gitlab instance. The lines above can dramatically reduce the number of times you need to type your password and 2FA codes.</p>
+<p>If you want to use Visual Studio Code for code development on <code class="docutils literal notranslate"><span class="pre">lxplus</span></code> then read the <a class="reference external" href="https://cern.service-now.com/service-portal?id=kb_article&amp;amp;n=KB0008901">specific instructions</a></p>
 </section>
 </section>
 

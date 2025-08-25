@@ -85,4 +85,38 @@ Back on your VSCode, you should be able to see an icon for managing your Copilot
 
 This is where you can login, and once this is completed you should be able to see you are on the premium plan. To the right of the search bar, you should also be able to see the GitHub copilot icon. Here you can make a prompt to see an AI response. The AI is allowed to see your full directory structure and able to make folders/files. It can not make folders/files on the nectar machine. When on a python script or a jupyter notebook, another helpful tool is found by pressing `ctrl+i`. This will create a chat prompt which can alter the current document you are working on. You must either accept or cancel the changes.
 
+## Connect to CERN
+The setup of the `nectar9` cluster here in Australia and the `lxplus` cluster at CERN are in principle identical. In general you are better off using the `nectar9` cluster as you avoid the very long round-trip time for the connection to CERN (it is about 300ms while it is about 5ms for `nectar9`) that can make interactive work very painful. Nevertheless if you are reading data from the `/eos` filesystem at CERN it might be easier to do something on `lxplus`.
 
+To connect by `ssh` to `lxplus.cern.ch` you can't use a public key as you need to type your password to obtain write access to your home directory. The best is to add something like the lines below to your `.ssh/config` file
+
+```
+# Ensure that you only need to type your password and 2FA once if you have parallel logins
+Host lxplus
+   HostName lxplus.cern.ch
+   ControlPath /run/user/%i/%r@%h:%p
+   ControlMaster auto
+
+# Make sure that you can still use Gitlab at CERN with a key.
+Host gitlab.cern.ch
+   IdentityFile <CERN-Gitlab-key>
+   StrictHostKeyChecking no
+   PubkeyAuthentication yes
+   GSSAPIAuthentication no
+   GSSAPIDelegateCredentials no
+   ForwardAgent no
+   ForwardX11 no
+   ForwardX11Trusted no
+
+Host *.cern.ch
+   User <user>
+   PubkeyAuthentication no
+   PasswordAuthentication yes
+   GSSAPIAuthentication no
+   GSSAPIDelegateCredentials no
+   CheckHostIP no
+   ControlPersist 1m
+```
+where you should substitute in your CERN username instead of `<user>` and `<CERN-Gitlab-key>` with the ssh public key you have uploaded to the CERN Gitlab instance. The lines above can dramatically reduce the number of times you need to type your password and 2FA codes.
+
+If you want to use Visual Studio Code for code development on `lxplus` then read the [specific instructions](https://cern.service-now.com/service-portal?id=kb_article&n=KB0008901)
