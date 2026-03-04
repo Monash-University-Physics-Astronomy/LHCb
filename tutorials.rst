@@ -22,4 +22,10 @@ sPlots
 
    notebooks/sPlot
 
+External documentation
+----------------------
+
+- `HSF Analysis Essentials <https://hsf-training.github.io/analysis-essentials/>`_
+- `LHCb Run 3 StarterKit <https://lhcb-starterkit-run3.docs.cern.ch/>`_
+
 
