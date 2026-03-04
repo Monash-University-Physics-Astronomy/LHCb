@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Code development &mdash; Monash LHCb 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=2709fde1"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -94,7 +94,7 @@ Just search for the names in the extension tab as shown below, click on it and i
 <div><p><strong>Note:</strong><br />
 As always be careful when you install software. Check that all the etension above have the <code class="docutils literal notranslate"><span class="pre">microsoft.com</span></code> badge on them before you click install. For other extensions do your due diligence. Do they have millions of installations, is it a case of typo squatting, read the reviews!</p>
 </div></blockquote>
-<p>After installing the extensions, you can now connect to the <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster by clicking on the small set of arrows in the very bottom left of the window, then select <code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">to</span> <span class="pre">Host</span> <span class="pre">...</span></code> and pick <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> from the list. It should now open a new window where you now work on the remote <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> machine. If <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> is not in the list, something has been missed in the section on obtaining an account. The first time you connect, you might have to pick <code class="docutils literal notranslate"><span class="pre">linux</span></code> as the type for the remote.</p>
+<p>After installing the extensions, you can now connect to the <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster by clicking on the small set of arrows in the very bottom left of the window, then select <code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">to</span> <span class="pre">Host</span> <span class="pre">...</span></code> and pick <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> from the list. It should now open a new window where you now work on the remote <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> machine. If <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> is not in the list, something has been missed in the section on obtaining an account. The first time you connect, you might have to pick <code class="docutils literal notranslate"><span class="pre">linux</span></code> as the type for the remote. You will also in a small window be asked to provide your 2FA.</p>
 <p><img alt="Remote - connect" src="_images/connect-ssh.png" /> <img alt="Connect to host" src="_images/connect-to-host.png" />.</p>
 </section>
 <section id="setup-your-coding-area">
@@ -165,7 +165,7 @@ You might get a timeout when starting the Jupyter kernel. This is because softwa
 <p><img alt="Remote - SSH extension in VS Code" src="_images/GitHub-Copilot.png" /></p>
 <p>To then access the Pro plan you will have to have a <a class="reference external" href="https://code.visualstudio.com/docs/copilot/overview">GitHub</a> account which is linked to your Monash account, and proceed to the following <a class="reference external" href="https://github.com/settings/education/benefits">link</a>. From here you must press the ‘Start an application’ button and proceed as either a student or educator. You will have to provide evidence that you are in fact student or educator, and for students a picture of your transcript from <a class="reference external" href="https://my.monash.edu/wes/">wes</a> will work. For staff, a picture from your letter of employment should work as well. There are other pieces of evidence you could also use as proof, but these are the ones that are known to work. If you are denied it will provide reason(s) it was denied and you are able to start another application again, this must be with a different image (you will have to screenshot your evidence again). Common reason(s) for being denied is simply not completing information GitHub requires and also not having two-factor authentication. The approval time takes ~1 minute, and once you are approved you should be able to see the following:</p>
 <p><img alt="Remote - SSH extension in VS Code" src="_images/GitHub-Copilot-Approval.png" /></p>
-<p>Back on your VSCode, you should be able to see an icon for managing your Copilot usage in the bottom right hand corner:</p>
+<p>Back in VSCode, you should be able to see an icon for managing your Copilot usage in the bottom right hand corner:</p>
 <p><img alt="Remote - SSH extension in VS Code" src="_images/GitHub-Copilot-VSCode.png" /></p>
 <p>This is where you can login, and once this is completed you should be able to see you are on the premium plan. To the right of the search bar, you should also be able to see the GitHub copilot icon. Here you can make a prompt to see an AI response. The AI is allowed to see your full directory structure and able to make folders/files. It can not make folders/files on the nectar machine. When on a python script or a jupyter notebook, another helpful tool is found by pressing <code class="docutils literal notranslate"><span class="pre">ctrl+i</span></code>. This will create a chat prompt which can alter the current document you are working on. You must either accept or cancel the changes.</p>
 </section>

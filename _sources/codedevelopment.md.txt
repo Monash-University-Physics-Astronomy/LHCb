@@ -11,7 +11,7 @@ Just search for the names in the extension tab as shown below, click on it and i
 > **Note:**  
 > As always be careful when you install software. Check that all the etension above have the `microsoft.com` badge on them before you click install. For other extensions do your due diligence. Do they have millions of installations, is it a case of typo squatting, read the reviews!
 
-After installing the extensions, you can now connect to the `nectar` cluster by clicking on the small set of arrows in the very bottom left of the window, then select `Connect to Host ...` and pick `nectar9` from the list. It should now open a new window where you now work on the remote `nectar9` machine. If `nectar9` is not in the list, something has been missed in the [section on obtaining an account](#obtain-an-account). The first time you connect, you might have to pick `linux` as the type for the remote.
+After installing the extensions, you can now connect to the `nectar` cluster by clicking on the small set of arrows in the very bottom left of the window, then select `Connect to Host ...` and pick `nectar9` from the list. It should now open a new window where you now work on the remote `nectar9` machine. If `nectar9` is not in the list, something has been missed in the [section on obtaining an account](#obtain-an-account). The first time you connect, you might have to pick `linux` as the type for the remote. You will also in a small window be asked to provide your 2FA.
 
 ![Remote - connect](images/connect-ssh.png) ![Connect to host](images/connect-to-host.png).
 
@@ -79,7 +79,7 @@ To then access the Pro plan you will have to have a [GitHub](https://code.visual
 
 ![Remote - SSH extension in VS Code](images/GitHub-Copilot-Approval.png)
 
-Back on your VSCode, you should be able to see an icon for managing your Copilot usage in the bottom right hand corner:
+Back in VSCode, you should be able to see an icon for managing your Copilot usage in the bottom right hand corner:
 
 ![Remote - SSH extension in VS Code](images/GitHub-Copilot-VSCode.png)
 
