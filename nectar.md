@@ -11,16 +11,24 @@ Wait for Ulrik to tell you that the account is ready and give you a username. Th
 Host nectar9
      User <user>
      PubkeyAuthentication yes
-     IdentityFile ~/.ssh/<keyfile>
-     ProxyJump frontend
+     IdentityFile ~/.ssh/id_nectar
+     ProxyJump egede@frontend
 
 Host frontend
      User <user>
      PubkeyAuthentication yes
-     IdentityFile ~/.ssh/<keyfile>
+     IdentityFile ~/.ssh/id_rsa
      Hostname frontend.lhcb-simulation.cloud.edu.au
+     ControlPath /run/user/%i/%r@%h:%p
+     ControlMaster auto
 ```
-where you replace `<user>` with the username you are given and `<keyfile>` is the name of the file that doesn't have the `.pub` extension.
+where you replace `<user>` with the username you are given and `<keyfile>` is the name of the file that doesn't have the `.pub` extension. 
+
+> **Note:**
+> If you connect from a Windows machine, replace the directory in `ControlPath` with `~/.ssh/sockets/%r@%h-%p` and make sure to create the folder `sockets` inside your hidden `.ssh` folder.
+
+## Setup two factor authentication
+Contact Ulrik to setup two factor authentication. In most cases this requires a visit to his office.
 
 ## Test account
 Now from the terminal (command) window try
@@ -31,7 +39,7 @@ and confirm that it logs you in. If it doesn't work, do
 ```bash
 ssh -vvv nectar9
 ```
-ask for help, including the output of the last command.
+and ask for help, including the output of the last command.
 
 ## Disk space
 On the `nectar` cluster you have a home directory at `/home/<user>`. You are the only one who can read content in that directory. To share data with other users, create a directory below `/shared` that has an explaining name. Everybody on the cluster will have access to those files.

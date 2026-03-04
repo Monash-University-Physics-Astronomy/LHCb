@@ -22,6 +22,7 @@ sPlots
 
    notebooks/sPlot
 
+
 .. _COWs:
 
 sWeights extended and COWs
@@ -31,3 +32,9 @@ sWeights extended and COWs
    :maxdepth: 1
 
    notebooks/COWs
+
+External documentation
+----------------------
+
+- `HSF Analysis Essentials <https://hsf-training.github.io/analysis-essentials/>`_
+- `LHCb Run 3 StarterKit <https://lhcb-starterkit-run3.docs.cern.ch/>`_
