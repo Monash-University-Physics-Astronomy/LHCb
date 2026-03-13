@@ -11,13 +11,13 @@ Wait for Ulrik to tell you that the account is ready and give you a username. Th
 Host nectar9
      User <user>
      PubkeyAuthentication yes
-     IdentityFile ~/.ssh/id_nectar
-     ProxyJump egede@frontend
+     IdentityFile ~/.ssh/<keyfile>
+     ProxyJump frontend
 
 Host frontend
      User <user>
      PubkeyAuthentication yes
-     IdentityFile ~/.ssh/id_rsa
+     IdentityFile ~/.ssh/<keyfile>
      Hostname frontend.lhcb-simulation.cloud.edu.au
      ControlPath /run/user/%i/%r@%h:%p
      ControlMaster auto
@@ -25,7 +25,7 @@ Host frontend
 where you replace `<user>` with the username you are given and `<keyfile>` is the name of the file that doesn't have the `.pub` extension. 
 
 > **Note:**
-> If you connect from a Windows machine, replace the directory in `ControlPath` with `~/.ssh/sockets/%r@%h-%p` and make sure to create the folder `sockets` inside your hidden `.ssh` folder.
+> If you connect from a Windows machine, replace the directory in `ControlPath` with `~/.ssh/sockets/%r@%h-%p` and make sure to create the folder `sockets` inside your hidden `.ssh` folder. If it still doesn't work, try to completely remove the `ControlPath` and `ControlMaster` lines.
 
 ## Setup two factor authentication
 Contact Ulrik to setup two factor authentication. In most cases this requires a visit to his office.
