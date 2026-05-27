@@ -1,0 +1,617 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basics &mdash; Monash LHCb 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributing" href="../Contributing.html" />
+    <link rel="prev" title="sWeights extended and COWs" href="COWs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Monash LHCb
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../lhcbregistration.html">Registration in the LHCb collaboration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nectar.html">Nectar computing cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../codedevelopment.html">Code development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#analysis-tools">Analysis tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#splots">sPlots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#sweights-extended-and-cows">sWeights extended and COWs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#jets">Jets</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Basics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Algorithms-and-Combination-Schemes">Algorithms and Combination Schemes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Jet-Pruning">Jet Pruning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Simulation">Simulation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PYTHIA">PYTHIA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Analysis-Production">Analysis Production</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Particle-Flow">Particle Flow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Jet-Building">Jet Building</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Jet-Functors">Jet Functors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#external-documentation">External documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Monash LHCb</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Basics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Jets.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Basics">
+<h1>Basics<a class="headerlink" href="#Basics" title="Link to this heading"></a></h1>
+<p>This section will introduce jets at a basic level. More detailed definitions are in resource links therein.</p>
+<p>A jet (shown below) is a ‘collimated spray’ of particles that originate from a parton* and subsequently hadronise. Given that they are formed from the evolution of parton interactions, all the way to hadronisation and detection, jet observables can be used to study unique QCD effects, including fragmentation functions and particle hadronisation.</p>
+<p><img alt="A jet at LHCb" src="../_images/jet.jpg" /></p>
+<p>There are several observables of interest, and these can be found in detail in the following resources:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1901.10342">Looking inside jets: an introduction to jet substructure and boosted-object phenomenology</a> (S. Marzani, G. Soyez &amp; M. Spannowsky)</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2112.15122">Jet Physics from the Ground Up</a> (A. Larkoski)</p></li>
+<li><p><a class="reference external" href="https://iopscience.iop.org/book/mono/978-1-6817-4073-7">Hadronic Jets</a> (A. Barfi)</p></li>
+</ul>
+<section id="Algorithms-and-Combination-Schemes">
+<h2>Algorithms and Combination Schemes<a class="headerlink" href="#Algorithms-and-Combination-Schemes" title="Link to this heading"></a></h2>
+<p>Experimentally, the particles comprising the jet is defined by an algorithm and a particle combination schemes. Some algorithms include (but are not limited to): fixed-cone, iterative-cone and sequential algorithms. Combination schemes include (but are not limited to): <span class="math notranslate nohighlight">\(E\)</span>-scheme, <span class="math notranslate nohighlight">\(pT\)</span>-weighted scheme and WTA (Winner-Take-All) scheme.</p>
+<p>At LHCb, a commonly used jet definition is given by the anti-<span class="math notranslate nohighlight">\(k_T\)</span> algorithm with the <span class="math notranslate nohighlight">\(E\)</span>-scheme (addition of four-vectors). The anti-<span class="math notranslate nohighlight">\(k_T\)</span> algorithm clusters from hardest particle first. As such it is resilient to soft-radiation, but as a result is also blind to such effects. Therefore the algorithm should be chosen carefully. A unique property of the anti-<span class="math notranslate nohighlight">\(k_T\)</span> algorithm, compared to others such as <span class="math notranslate nohighlight">\(k_T\)</span> (<span class="math notranslate nohighlight">\(k=1\)</span>) or Cambridge-Aachen (<span class="math notranslate nohighlight">\(k=0\)</span>), is that it
+is infrared and collinear (IRC) safe at all orders. This also makes it safe to analyse from a theory perspective***. The anti-<span class="math notranslate nohighlight">\(k_T\)</span> algorithm is given by the application of the following steps where <span class="math notranslate nohighlight">\(k=-1\)</span> :</p>
+<ol class="arabic simple">
+<li><p>For each pair of particles <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(j\)</span>, define a distance</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[d_{ij} = \min \left(p_{T_i}^{2k}, p_{T_j}^{2k}\right)\frac{\Delta R_{ij}^2}{R^2}\]</div>
+<p>and a distance to the beam,</p>
+<div class="math notranslate nohighlight">
+\[d_{iB} = p_{T_i}^{2k}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_{T_i}\)</span> is the transverse momentum of the particle <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(\Delta R_{ij}^2 = (y_i-y_j)^2+(\phi_i-\phi_j)^2\)</span>, and <span class="math notranslate nohighlight">\(R\)</span> is the jet radius parameter**.</p>
+<ol class="arabic simple" start="2">
+<li><p>Find the smallest distance:</p>
+<ol class="loweralpha simple">
+<li><p>If <span class="math notranslate nohighlight">\(d_{ij}\)</span> is smallest, merge particles <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> into one pseudo-particle using a combination scheme (typically <span class="math notranslate nohighlight">\(E\)</span>-scheme).</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(d_{iB}\)</span> is smallest, declare particle <span class="math notranslate nohighlight">\(i\)</span> (which may be a pseudoparticle) a jet and remove it from the list.</p></li>
+</ol>
+</li>
+<li><p>Repeat until no particles remain.</p></li>
+</ol>
+<p>*: In QCD, it can be difficult to isolate one parton such as a gluon from two gluons which happen to be collinear.</p>
+<p>**: The radius parameter, <span class="math notranslate nohighlight">\(R\)</span>, corresponds to a distance in <span class="math notranslate nohighlight">\(y-\phi\)</span> phase space and does not mean that the jet is circular in coordinate space. Further, jets can be ‘close’ to another which ‘squeezes’ the boundary of each jet. As a result the jet, even in phase space, may not be circular.</p>
+<p>***: Flavour-tagging is sometimes best done via the WTA algorithm.</p>
+</section>
+<section id="Jet-Pruning">
+<h2>Jet Pruning<a class="headerlink" href="#Jet-Pruning" title="Link to this heading"></a></h2>
+<p>Experimentally, the jet can also undergo ‘pruning’ or ‘grooming’ processes (see below), to eliminate soft/wide radiation under certain conditions e.g.</p>
+<div class="math notranslate nohighlight">
+\[\frac{\min (p_{T_1},p_{T_2})}{p_{T_1}+p_{T_2}} &gt;_? z_{\text{cut}}\left(\frac{\Delta R_{12}}{R}\right)\]</div>
+<p>More details can be found at <a class="reference external" href="https://indico.cern.ch/event/1516422/timetable/#45-jets-at-lhcb-how-we-study-t">Jets at LHCb Startertalk</a> (E. Lesser)</p>
+<p><img alt="An example of jet grooming." src="../_images/jetgroom.png" /></p>
+</section>
+</section>
+<section id="Simulation">
+<h1>Simulation<a class="headerlink" href="#Simulation" title="Link to this heading"></a></h1>
+<section id="PYTHIA">
+<h2>PYTHIA<a class="headerlink" href="#PYTHIA" title="Link to this heading"></a></h2>
+<p>Information for running jet algorithms through PYTHIA can be found in the program <a class="reference external" href="https://pythia.org/latest-manual/Welcome.html">manual</a> or <a class="reference external" href="https://pythia.org/latest-manual/Welcome.html">worksheet</a>. It is worth noting that the PYTHIA simulated jets use the same code of <code class="docutils literal notranslate"><span class="pre">FastJet</span></code> (i.e the same software used to create jets at LHCb). The method for simulating jets in PYTHIA is known as <code class="docutils literal notranslate"><span class="pre">SlowJet</span></code>. As of writing, PYTHIA does not support jet grooming.</p>
+<p>A simple example of running jet simulations in PYTHIA is below (given by <code class="docutils literal notranslate"><span class="pre">main211.cc</span></code> in PYTHIA):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>// main211.cc is a part of the PYTHIA event generator.
+// Copyright (C) 2025 Torbjorn Sjostrand.
+// PYTHIA is licenced under the GNU GPL v2 or later, see COPYING for details.
+// Please respect the MCnet Guidelines, see GUIDELINES for details.
+
+// Keywords: basic usage; jet finding; slowjet;
+
+// This is a simple test program.
+// It studies jet production at the LHC, using SlowJet,
+// here as a Pythia-centric wrapper for FastJet.
+
+#include &quot;Pythia8/Pythia.h&quot;
+using namespace Pythia8;
+
+//==========================================================================
+
+int main() {
+
+  // Number of events, generated and listed ones.
+  int nEvent    = 1000;
+  int nListJets = 5;
+
+  // Generator. LHC process and output selection. Initialization.
+  Pythia pythia;
+  pythia.readString(&quot;Beams:eCM = 14000.&quot;);
+  pythia.readString(&quot;HardQCD:all = on&quot;);
+  pythia.readString(&quot;PhaseSpace:pTHatMin = 200.&quot;);
+  pythia.readString(&quot;Next:numberShowInfo = 0&quot;);
+  pythia.readString(&quot;Next:numberShowProcess = 0&quot;);
+  pythia.readString(&quot;Next:numberShowEvent = 0&quot;);
+
+  // If Pythia fails to initialize, exit with error.
+  if (!pythia.init()) return 1;
+
+  // Standard parameters for a jet finder.
+  double radius   = 0.7;
+  double pTjetMin = 10.;
+  double etaMax   = 4.;
+  // Exclude neutrinos (and other invisible) from study.
+  int    nSel     = 2;
+
+  // Set up SlowJet jet finder, with anti-kT clustering (-1)
+  // and pion mass assumed for non-photons.
+  SlowJet slowJet( -1, radius, pTjetMin, etaMax, nSel, 1);
+
+  // Histograms.
+  Hist nJets(&quot;number of jets&quot;, 50, -0.5, 49.5);
+  Hist pTjets(&quot;pT for jets&quot;, 100, 0., 500.);
+  Hist yJets(&quot;y for jets&quot;, 100, -5., 5.);
+  Hist phiJets(&quot;phi for jets&quot;, 100, -M_PI, M_PI);
+  Hist distJets(&quot;R distance between jets&quot;, 100, 0., 10.);
+  Hist pTdiff(&quot;pT difference between jets&quot;, 100, -100., 400.);
+
+  // Begin event loop. Generate event. Skip if error.
+  for (int iEvent = 0; iEvent &lt; nEvent; ++iEvent) {
+    if (!pythia.next()) continue;
+
+    // Analyze Slowet jet properties. List first few.
+    slowJet.analyze( pythia.event );
+    if (iEvent &lt; nListJets) slowJet.list();
+
+    // Fill SlowJet inclusive jet distributions.
+    nJets.fill( slowJet.sizeJet() );
+    for (int i = 0; i &lt; slowJet.sizeJet(); ++i) {
+      pTjets.fill( slowJet.pT(i) );
+      yJets.fill( slowJet.y(i) );
+      phiJets.fill( slowJet.phi(i) );
+    }
+
+    // Fill SlowJet distance between jets.
+    for (int i = 0; i &lt; slowJet.sizeJet() - 1; ++i)
+    for (int j = i + 1; j &lt; slowJet.sizeJet(); ++j) {
+      double dY = slowJet.y(i) - slowJet.y(j);
+      double dPhi = abs( slowJet.phi(i) - slowJet.phi(j) );
+      if (dPhi &gt; M_PI) dPhi = 2. * M_PI - dPhi;
+      double dR = sqrt( pow2(dY) + pow2(dPhi) );
+      distJets.fill( dR );
+    }
+
+    // Fill SlowJet pT-difference between jets (to check ordering of list).
+    for (int i = 1; i &lt; slowJet.sizeJet(); ++i)
+      pTdiff.fill( slowJet.pT(i-1) - slowJet.pT(i) );
+
+  // End of event loop. Statistics. Histograms.
+  }
+  pythia.stat();
+  cout &lt;&lt; nJets &lt;&lt; pTjets &lt;&lt; yJets &lt;&lt; phiJets &lt;&lt; distJets &lt;&lt; pTdiff;
+
+  // Done.
+  return 0;
+}
+</pre></div>
+</div>
+<p>The user can print out some jet statistics via <code class="docutils literal notranslate"><span class="pre">slowJet.list()</span></code>, whose output is shown below:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--  PYTHIA SlowJet(fjcore) Listing, p = -1, R = 0.500, pTjetMin =   6.000, etaMax = 25.000  --
+
+  no      pTjet      y       phi   mult      p_x        p_y        p_z         e          m
+   0     10.031   -2.074    1.423    15      1.478      9.922    -41.889     43.235      3.730
+   1      9.612   -2.002   -2.725     9     -8.789     -3.892    -37.370     38.759      3.646
+   2      7.733    0.824   -1.268    15      2.305     -7.382      8.335     12.307      4.711
+   3      6.917    3.562    0.625     4      5.611      4.046    125.257    125.459      1.672
+   4      6.400   -2.552    0.363    10      5.984      2.272    -42.116     42.630      1.614
+</pre></div>
+</div>
+<p>It is also possible to examine the particles within the jet:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>for(int j = 0; j &lt; slowJet.sizeJet(); j++){
+    \\Loop through all jets in an event
+
+    for(size_t k: slowJet.constituents(j)){
+        \\Loop through all constituents of a given jet
+
+        \\ Insert whatever information you&#39;d like to know about particle, `k`, in jet, `j`, here. You can use `pythia.event[k].index()` or other such functions as normal.
+    }
+}
+</pre></div>
+</div>
+</section>
+</section>
+<section id="Analysis-Production">
+<h1>Analysis Production<a class="headerlink" href="#Analysis-Production" title="Link to this heading"></a></h1>
+<p>This section demonstrates how to produce jets using the Analsyis Productions framework. As of writing this is valid for the Run 3 data-taking period at LHCb.</p>
+<p>In general, the method of incorporating a jet into an Analysis Production involves three steps:</p>
+<ol class="arabic simple">
+<li><p>Construct a particle flow.</p></li>
+<li><p>Build the jet</p></li>
+<li><p>Apply functors to the jet object</p></li>
+</ol>
+<section id="Particle-Flow">
+<h2>Particle Flow<a class="headerlink" href="#Particle-Flow" title="Link to this heading"></a></h2>
+<p>A jet algorithm needs a container of particles from which it builds the jets. This container, in Run 3, is given by a ‘particle flow’ and is the output of <code class="docutils literal notranslate"><span class="pre">ParticleFlowMaker</span></code> given <a class="reference external" href="https://gitlab.cern.ch/lhcb/Rec/-/blob/master/Phys/JetAccessories/src/ParticleFlowMaker.cpp">here</a>. This function ensures that no two particles are duplicated in the jet, and furthermore can act as a way to deliberately insert particles into jet building.</p>
+<section id="Reconstructed-DATA/MC">
+<h3>Reconstructed DATA/MC<a class="headerlink" href="#Reconstructed-DATA/MC" title="Link to this heading"></a></h3>
+<p>In an analysis production, the user can call this method with input containers of their choice. For 2024 data for example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from PyConf.Algorithms import ParticleFlowMaker
+from Hlt2Conf.standard_jets import make_charged_particles
+from RecoConf.standard_particles import make_photons_PF, make_merged_pi0s
+
+def make_particleflow(name=&quot;PF_{hash}&quot;):
+    &quot;&quot;&quot;
+    Makes a particleflow container for input into the build_jets function.
+    &quot;&quot;&quot;
+    inputs = [
+        make_charged_particles(track_type=&quot;Long&quot;), \\charged particles with long tracks
+        make_charged_particles(track_type=&quot;Downstream&quot;), \\charged particles with downstream tracks
+        make_photons_PF(), \\photons
+        make_merged_pi0s(), \\neutral pions
+    ]
+
+    pflow = ParticleFlowMaker(
+        Inputs=inputs,
+        name=f&quot;{name}_initial&quot;,
+        #OutputLevel = 2,
+    )
+    pflow_container = pflow.Output
+    return pflow_container
+</pre></div>
+</div>
+<p>In comparison, the 2025 data taking sample may have different containers for the inputs above. Notably for a <span class="math notranslate nohighlight">\(B_c^\pm\)</span> spectroscopy line, the inputs would be:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>inputs = [
+    get_particles(&#39;/Event/Spruce/SpruceBandQ_BcForSpectroscopy/CandidatePVLongTracks_Pions/Particles&#39;),
+    get_particles(&#39;/Event/Spruce/SpruceBandQ_BcForSpectroscopy/PersistDownTracks_Pions/Particles&#39;),
+    get_particles(&#39;/Event/Spruce/SpruceBandQ_BcForSpectroscopy/PersistPhotons/Particles&#39;),
+    get_particles(&#39;/Event/Spruce/SpruceBandQ_BcForSpectroscopy/PersistMergedPi0s/Particles&#39;),
+]
+</pre></div>
+</div>
+<p>The largest upshot of the particle flow is that one can insert a particle (composite or otherwise) into the jet building. For example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from PyConf.reading import get_particles
+from PyConf.Algorithms import ParticleFlowMaker
+from Hlt2Conf.standard_jets import make_charged_particles
+from RecoConf.standard_particles import make_photons_PF, make_merged_pi0s
+
+def make_particleflow(year, name=&quot;PF_{hash}&quot;, bc_candidates=None):
+    &quot;&quot;&quot;
+    Makes a particleflow container with the addition of a B_c meson candidate if one exists in the collision. This function takes as input the data-taking year (which adjust the input container locations), and a container with the B_c mesons (MC reco or data).
+    &quot;&quot;&quot;
+    if year!=&#39;2024&#39;:
+        inputs = [
+            get_particles(&#39;/Event/Spruce/SpruceBandQ_BcForSpectroscopy/CandidatePVLongTracks_Pions/Particles&#39;),
+            get_particles(&#39;/Event/Spruce/SpruceBandQ_BcForSpectroscopy/PersistDownTracks_Pions/Particles&#39;),
+            get_particles(&#39;/Event/Spruce/SpruceBandQ_BcForSpectroscopy/PersistPhotons/Particles&#39;),
+            get_particles(&#39;/Event/Spruce/SpruceBandQ_BcForSpectroscopy/PersistMergedPi0s/Particles&#39;),
+        ]
+    else:
+        inputs = [
+            make_charged_particles(track_type=&quot;Long&quot;),
+            make_charged_particles(track_type=&quot;Downstream&quot;),
+            make_photons_PF(),
+            make_merged_pi0s(),
+        ]
+
+    # Initial PF
+    pflow_initial = ParticleFlowMaker(
+        Inputs=inputs,
+        name=f&quot;{name}_initial_debug&quot;,
+        #OutputLevel = 2,
+    )
+    pflow_initial_particles = pflow_initial.Output
+
+    if bc_candidates is not None:
+
+        pflow_final = ParticleFlowMaker(
+            Inputs=[pflow_initial_particles, bc_candidates],
+            name=f&quot;{name}_final_debug&quot;,
+            #OutputLevel = 2,
+        )
+
+        return pflow_final.Output
+
+    else:
+        return pflow_initial_particles
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">OutputLevel</span></code> is a useful tool to debug the process. Setting this parameter to <code class="docutils literal notranslate"><span class="pre">2</span></code> will output the number of composites, basics and rejected candidates in the flow. An example is shown in the image below.</p>
+<p><img alt="An example of the OutputLevel output." src="../_images/debug.png" /></p>
+</section>
+<section id="MC-Truth">
+<h3>MC Truth<a class="headerlink" href="#MC-Truth" title="Link to this heading"></a></h3>
+<p>In comparison, MC truth level jet algorithms are given by the <code class="docutils literal notranslate"><span class="pre">ParticleFlowMakerMC</span></code> function given <a class="reference external" href="https://gitlab.cern.ch/lhcb/Rec/-/blob/master/Phys/JetAccessories/src/ParticleFlowMakerMC.cpp?ref_type=heads">here</a>.</p>
+<p>It is called by declaring particles the user whiches to incorporate, and particles the user wishes to be deliberately excluded from the jet building. As an example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from PyConf.Algorithms import ParticleFlowMakerMC
+from RecoConf.data_from_file import mc_unpackers
+
+def make_particleflowMC(requestedParticlesPIDs=None, banPIDs=None):
+    if requestedParticlesPIDs is None:
+        requestedParticlesPIDs=[11, -11, 13, -13, 211, -211, 2112, -2112, 2212,-2212, 541, -541, 543, -543, 443, -443, 111, -111, 321, -321, 311, -311, 22, 310,-310, 130, -130] # e-, μ-, π+, n, p, B_c, B_c*, J/ψ, π0, K±, K0, γ, K_S0, K_L0 and their antiparticles
+    if banPIDs is None:
+        banPIDs=[12, 14, 16, -12, -14, -16] # ν_e, ν_μ, ν_τ and their antiparticles
+    return ParticleFlowMakerMC(
+        Inputs=[mc_unpackers()[&quot;MCParticles&quot;]],
+        requestedParticlesPIDs=requestedParticlesPIDs,
+        banPIDs=banPIDs).Output
+</pre></div>
+</div>
+</section>
+</section>
+<section id="Jet-Building">
+<h2>Jet Building<a class="headerlink" href="#Jet-Building" title="Link to this heading"></a></h2>
+<p>Once a particle flow is defined, the jet can be built. There are certain inputs into the jet builder that will be briefly described here.</p>
+<p>The jets can be made by calling the <code class="docutils literal notranslate"><span class="pre">build_jets</span></code> function or <code class="docutils literal notranslate"><span class="pre">FastJetBuilder</span></code> directly (and found <a class="reference external" href="https://gitlab.cern.ch/lhcb/Rec/-/blob/master/Phys/JetAccessories/src/FastJetBuilder.cpp?ref_type=heads">here</a>):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from PyConf.Algorithms import FastJetBuilder
+
+def build_jets(
+    pflow,
+    JetsByVtx=False,
+    MCJets=False,
+    RParameter=0.5,
+    applyJEC=False,
+    name=&quot;JetBuilder_{hash}&quot;,
+    ):
+    jetEcFilePath = &quot;&quot;  # Null jetEcFilePath: Don&#39;t apply JEC
+    if applyJEC:
+        jetEcFilePath = &quot;paramfile://data/JetEnergyCorrections_R05_hlt_Run2.root&quot;
+    return FastJetBuilder(
+        Input=pflow,
+        PVLocation=make_pvs(),
+        PtMin=5000,  #  FastJet: min pT
+        RParameter=RParameter,  #  FastJet: cone size
+        Sort=&quot;by_pt&quot;,  #  FastJet: sort by pt
+        Strategy=&quot;Best&quot;,  #  FastJet: strategy:
+        Type=&quot;antikt_algorithm&quot;,  #  FastJet: JetAlgortihm
+        Recombination=&quot;E_scheme&quot;,  #  FastJet: RecombinationScheme
+        JetID=98,  # LHCb: Jet PID number
+        JetsByVtx=JetsByVtx,
+        MCJets=MCJets,  # Reconstruct jets from particles from MCParticles
+        jetEcFilePath=jetEcFilePath,
+        jecLimNPvs=[0, 1],
+        jecLimEta=[2.0, 2.2, 2.3, 2.4, 2.6, 2.8, 3.0, 3.2, 3.6, 4.2, 4.5],
+        jecLimCpf=[0.06, 0.3, 0.4, 0.5, 0.6, 0.8, 1.0001],
+        jecLimPhi=[0, 1.0 / 6.0 * M_PI, 1.0 / 3.0 * M_PI, 0.5 * M_PI],
+        jecLimPt=[5, 298],
+        jetEcShift=0.0,
+        name=name,
+        #OutputLevel = 2,
+    ).Output
+</pre></div>
+</div>
+<p>A few input parameters require explanation:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pflow</span></code> is the output of the particle flow (defined in the previous section)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JetsByVtx</span></code> is a boolean. If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, it builds jets per vertex. However, neutral particles have no associated vertex, and thus they may ‘leak’ into jets. An analyst should appropriately correct for these in their data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MCJets</span></code> is also a boolean. It should be set to true if and only if the <code class="docutils literal notranslate"><span class="pre">pflow</span></code> used the <code class="docutils literal notranslate"><span class="pre">ParticleFlowMakerMC</span></code> function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RParameter</span></code> is the jet ‘radius’ parameter <span class="math notranslate nohighlight">\(R\)</span> (see ‘basics’ section).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PtMin</span></code> defines the minimum <span class="math notranslate nohighlight">\(p_T\)</span> threshold to define a jet.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Type</span></code> defines the type of algorithm to use. Default is anti-<span class="math notranslate nohighlight">\(k_T\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Recombination</span></code> defines the combination scheme between particles. By default this is set to the <span class="math notranslate nohighlight">\(E\)</span>-scheme which just adds four-momenta.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JetID</span></code> defines the ID of the jet. Set to 98.</p></li>
+</ul>
+<p>In practice, an Analysis Production will require the user to define its particle location. For a jet, one can call something like this (where the context here is inclusion of a particle into the flow):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import Functors as F
+from RecoConf.algorithms_thor import ParticleFilter
+
+def make_jets(year, name=&quot;SimpleJets_{hash}&quot;, pt_min=5 * GeV, JetsByVtx=True, MC=False, particle_candidates = None):
+
+    if MC:
+        pflow = make_particleflowMC()
+        jets = build_jets(pflow=pflow, MCJets=MC, JetsByVtx=JetsByVtx, name=&quot;MCJets&quot; + name)
+    else:
+        pflow = make_particleflow(particle_candidates = bc_candidates, year=year)
+        jets = build_jets(pflow=pflow, MCJets=MC, JetsByVtx=JetsByVtx, name=&quot;Jets&quot; + name)
+
+    code = F.require_all(
+        F.IS_ABS_ID(&quot;CELLjet&quot;), F.PT &gt; pt_min, F.NINGENERATION(F.CHARGE != 0, 1) &gt; 1
+    )
+
+    return ParticleFilter(jets, F.FILTER(code), name=name)
+</pre></div>
+</div>
+<p>and then use this function to define their decay tree tuple (DTT):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from DaVinci.algorithms import create_lines_filter
+from PyConf.reading import get_pvs, get_rec_summary, get_odin
+from DaVinci import make_config, Options
+from FunTuple import FunTuple_Particles as Funtuple
+
+def Jets_DTT(year, outputstr, mctruth = False):
+    &#39;&#39;&#39;
+    Tuples Jet information ONLY from DATA/MC RECO
+    This example also incorporates the addition of a B_c candidate into the jet building.
+    &#39;&#39;&#39;
+
+    bc_candidates = get_particles(&quot;/Event/Spruce/SpruceBandQ_BcForSpectroscopy/Particles&quot;)
+    jets = make_jets(year=year, particle_candidates = bc_candidates, )
+
+    pvs = get_pvs()
+    rec_summary = get_rec_summary()
+    odin = get_odin()
+
+
+    #Define fields and variables. CELLjet is the standard &#39;name&#39;
+
+    fields = {&quot;jet&quot;: &quot;^CELLjet&quot;}
+
+    variables = {...see next section...}
+
+    return Funtuple(
+        name=f&quot;{outputstr}_Jets&quot;,
+        tuple_name=f&quot;{outputstr}_Jets_DTT&quot;,
+        fields=fields,
+        variables=variables,
+        event_variables= {...whichever the user decides (HLT triggers, rec_summary, etc)...},
+        inputs=jets,
+        store_multiple_cand_info=True
+    )
+
+
+def main(options: Options, sample: str, year: str):
+
+    algs = {}
+
+    line = &quot;SpruceBandQ_BcForSpectroscopy&quot;
+    filter = create_lines_filter(name = &quot;SpruceBandQ_BcForSpectroscopy_{hash}&quot;, lines = [line])
+
+    if(sample ==&quot;DATA&quot;):
+        algs[&quot;Jets_DTT_DATA&quot;] = [filter, &quot;DATA&quot;, Jets_DTT(year)]
+    else:
+        algs[&quot;Jets_DTT_MCRECO&quot;] = [filter, &quot;MCRECO&quot;, Jets_DTT(year)] #uses make_jets(MC = False) and MC Particle BKK query with &#39;ParticleFlow&#39;
+        algs[&quot;Jets_DTT_MCTRUTH&quot;] = [Jets_DTT(year, &quot;MCTRUTH&quot;, mctruth = True)] #uses make_jets(MC = True) with &#39;MCParticleFlow&#39;
+
+    return make_config(options, algs)
+</pre></div>
+</div>
+</section>
+<section id="Jet-Functors">
+<h2>Jet Functors<a class="headerlink" href="#Jet-Functors" title="Link to this heading"></a></h2>
+<p>In the previous section, the user defined variables were not defined. Some useful ones are listed below. A full list of variables can of course be found <a class="reference external" href="https://gitlab.cern.ch/lhcb/Rec/-/blob/master/Phys/FunctorCore/python/Functors/__init__.py">here</a>.</p>
+<p>One can treat the jet similar to, but not exactly like, a composite object. For example a user can call:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from FunTuple import FunctorCollection as FC
+
+variables = FC({
+    &quot;ETA&quot;: F.ETA,
+    &quot;PHI&quot;: F.PHI,
+    &quot;PT&quot;: F.PT,
+    &quot;MASS&quot;: F.MASS,
+    &quot;Q&quot;: F.CHARGE,
+    &quot;OBJECT_KEY&quot;: F.OBJECT_KEY,
+    &quot;TX&quot;: F.TX,
+    &quot;TY&quot;: F.TY,
+    &quot;nCons&quot;: F.NINGENERATION(F.ALL, 1),
+    &quot;nChargedCons&quot;: F.NINGENERATION(F.CHARGE != 0, 1),
+    &quot;ConstituentPx&quot;: F.MAP(F.PX) @ F.GET_GENERATION(1),
+    &quot;ConstituentPy&quot;: F.MAP(F.PY) @ F.GET_GENERATION(1),
+    &quot;ConstituentPz&quot;: F.MAP(F.PZ) @ F.GET_GENERATION(1),
+    &quot;ConstituentPt&quot;: F.MAP(F.PT) @ F.GET_GENERATION(1),
+    &quot;ConstituentEta&quot;: F.MAP(F.ETA) @ F.GET_GENERATION(1),
+    &quot;ConstituentPhi&quot;: F.MAP(F.PHI) @ F.GET_GENERATION(1),
+    &quot;ConstituentMass&quot;: F.MAP(F.MASS) @ F.GET_GENERATION(1),
+    &quot;ConstituentQ&quot;: F.MAP(F.CHARGE) @ F.GET_GENERATION(1),
+    &quot;ConstituentPID&quot;: F.MAP(F.PARTICLE_ID) @ F.GET_GENERATION(1),
+    &quot;ConstituentKey&quot;: F.MAP(F.OBJECT_KEY) @ F.GET_GENERATION(1),
+})
+</pre></div>
+</div>
+<p>The ‘ConstituentX’ variables simply look at the first descendant of the jet object and return the given variable. You should note that the jet however is a collection of final state objects. So the output of, say <code class="docutils literal notranslate"><span class="pre">ConstituentPt</span></code> will be an array (e.g <code class="docutils literal notranslate"><span class="pre">[5430,</span> <span class="pre">10450,</span> <span class="pre">650,</span> <span class="pre">8213]</span></code>) and this array need not the be same size for each jet. This means that analysis of the constituents should be flexible with array size.</p>
+<p>If the jet is not MC TRUTH, then one can also look closer at the variables of a given input particle into the jet. For an example of a <span class="math notranslate nohighlight">\(B_c^\pm\)</span> candidate inserted into the jet, additional variables could be:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if not mctruth:
+    variables += FC({
+        &quot;OWNPV&quot;: F.OWNPV(),
+        &quot;OWNPVX&quot;: F.OWNPVX(),
+        &quot;OWNPVY&quot;: F.OWNPVY(),
+        &quot;OWNPVZ&quot;: F.OWNPVZ(),
+        &quot;OWNPVIP&quot;: F.OWNPVIP(),
+        &quot;OWNPVIPCHI2&quot;: F.OWNPVIPCHI2(),
+        &quot;ConBcPT&quot;: F.MAP(F.PT) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcPID&quot;: F.MAP(F.PARTICLE_ID) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcETA&quot;: F.MAP(F.ETA) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcPHI&quot;: F.MAP(F.PHI) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcMASS&quot;: F.MAP(F.MASS) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcOWNPV&quot;: F.MAP(F.OWNPV()) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcOWNPVIP&quot;: F.MAP(F.OWNPVIP()) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcOWNPVIPCHI2&quot;: F.MAP(F.OWNPVIPCHI2()) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcENERGY&quot;: F.MAP(F.ENERGY) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcDescendantP&quot;: F.MAP(F.P) @ F.FLATTEN() @ F.MAP(F.GET_ALL_DESCENDANTS()) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcDescendantPT&quot;: F.MAP(F.PT) @ F.FLATTEN() @ F.MAP(F.GET_ALL_DESCENDANTS()) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcDescendantETA&quot;: F.MAP(F.ETA) @ F.FLATTEN() @ F.MAP(F.GET_ALL_DESCENDANTS()) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcDescendantPHI&quot;: F.MAP(F.PHI) @ F.FLATTEN() @ F.MAP(F.GET_ALL_DESCENDANTS()) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcDescendantPID&quot;: F.MAP(F.PARTICLE_ID) @ F.FLATTEN() @ F.MAP(F.GET_ALL_DESCENDANTS()) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcDescendantOWNPVIPCHI2&quot;: F.MAP(F.OWNPVIPCHI2()) @ F.FLATTEN() @ F.MAP(F.GET_ALL_DESCENDANTS()) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcDescendantMASS&quot;: F.MAP(F.MASS) @ F.FLATTEN() @ F.MAP(F.GET_ALL_DESCENDANTS()) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+        &quot;ConBcDescendantENERGY&quot;: F.MAP(F.ENERGY) @ F.FLATTEN() @ F.MAP(F.GET_ALL_DESCENDANTS()) @ F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;)) @ F.GET_GENERATION(1),
+
+    })
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">ConBcX</span></code> stands for ‘Consituent of B_c has variable X with value …’. Further, the <code class="docutils literal notranslate"><span class="pre">F.FILTER(F.IS_ABS_ID(&quot;B_c+&quot;))</span></code> functor does not eliminate the array nature of the functor result.</p>
+<p>As an example, take a jet whose constituents have masses <code class="docutils literal notranslate"><span class="pre">[5450,</span> <span class="pre">145,</span> <span class="pre">145,</span> <span class="pre">6250,</span> <span class="pre">3181,</span> <span class="pre">0,</span> <span class="pre">0]</span></code> and assume the object with mass 6250 is the <span class="math notranslate nohighlight">\(B_c^\pm\)</span> candidate. If one examined <code class="docutils literal notranslate"><span class="pre">ConBcMASS</span></code>, the output would be <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">6250,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0]</span></code>. There may be ways to reduce this array using better functor notation.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="COWs.html" class="btn btn-neutral float-left" title="sWeights extended and COWs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Monash LHCb.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
