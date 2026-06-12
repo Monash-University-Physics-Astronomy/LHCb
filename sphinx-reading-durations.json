@@ -1,12 +1,13 @@
 {
     "Contributing": 0.011,
-    "README": 0.012,
-    "codedevelopment": 0.015,
+    "README": 0.011,
+    "codedevelopment": 0.014,
     "index": 0.002,
     "lhcbregistration": 0.005,
     "nectar": 0.006,
-    "notebooks/COWs": 0.953,
-    "notebooks/analysis_basics": 1.042,
-    "notebooks/sPlot": 0.829,
-    "tutorials": 0.005
+    "notebooks/COWs": 0.882,
+    "notebooks/Jets": 0.573,
+    "notebooks/analysis_basics": 0.882,
+    "notebooks/sPlot": 0.825,
+    "tutorials": 0.006
 }
