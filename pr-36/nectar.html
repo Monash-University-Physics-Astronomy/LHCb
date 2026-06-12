@@ -1,0 +1,470 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nectar computing cluster &mdash; Monash LHCb 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Code development" href="codedevelopment.html" />
+    <link rel="prev" title="Registration in the LHCb collaboration" href="lhcbregistration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Monash LHCb
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lhcbregistration.html">Registration in the LHCb collaboration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Nectar computing cluster</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#obtain-an-account">Obtain an account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup-two-factor-authentication">Setup two factor authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-account">Test account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disk-space">Disk space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-nectar-computing-cluster-with-htcondor">Using the Nectar computing cluster with HTCondor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-an-executable-on-a-large-group-of-data-files">Running an executable on a large group of data files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#downloading-a-group-of-data-files-from-analysis-productions-any-files-from-dirac">Downloading a group of data files from Analysis Productions (any files from DIRAC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setting-up-the-grid-proxy">Setting up the grid proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-the-list-of-pfns">Getting the list of PFNs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-submit-file">The submit file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-job-scripts">The job scripts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#putting-it-all-together">Putting it all together</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="codedevelopment.html">Code development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Monash LHCb</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Nectar computing cluster</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/nectar.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="nectar-computing-cluster">
+<h1>Nectar computing cluster<a class="headerlink" href="#nectar-computing-cluster" title="Link to this heading"></a></h1>
+<p>The group has access to a computing cluster for performing simulations and analysis of LHCb data. It is configured to be as identical as possible to the <code class="docutils literal notranslate"><span class="pre">lxplus</span></code> machines at CERN. It is a linux cluster that you access via <code class="docutils literal notranslate"><span class="pre">ssh</span></code>.</p>
+<p>In general, anything you read in the <a class="reference external" href="https://lhcb-starterkit-run3.docs.cern.ch/">StarterKit</a> to do on <code class="docutils literal notranslate"><span class="pre">lxplus</span></code> can be done on the <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster as well.</p>
+<section id="obtain-an-account">
+<h2>Obtain an account<a class="headerlink" href="#obtain-an-account" title="Link to this heading"></a></h2>
+<p>Logins to the cluster can only happen via using an <code class="docutils literal notranslate"><span class="pre">ssh</span></code> keypair. This is similar to the passkey methods that are used on many websites. On your Windows/Mac/linux laptop, open a terminal (command) window. In that one type <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code>. Accept the default name and then provide a password that is at least 12 characters long. The program will report that it writes two files into the hidden <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> folder below your home folder. Via either email or Slack send the content of the files ending in <code class="docutils literal notranslate"><span class="pre">.pub</span></code> to your supervisor who will then forward it to Ulrik.</p>
+<p>Wait for Ulrik to tell you that the account is ready and give you a username. Then create (or edit if already there) a file called <code class="docutils literal notranslate"><span class="pre">config</span></code> in the hidden <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> folder inside your home folder. In it put the content</p>
+<div class="highlight-sshconfig notranslate"><div class="highlight"><pre><span></span>Host nectar9
+     User &lt;user&gt;
+     PubkeyAuthentication yes
+     IdentityFile ~/.ssh/&lt;keyfile&gt;
+     ProxyJump frontend
+
+Host frontend
+     User &lt;user&gt;
+     PubkeyAuthentication yes
+     IdentityFile ~/.ssh/&lt;keyfile&gt;
+     Hostname frontend.lhcb-simulation.cloud.edu.au
+     ControlPath /run/user/%i/%r@%h:%p
+     ControlMaster auto
+</pre></div>
+</div>
+<p>where you replace <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> with the username you are given and <code class="docutils literal notranslate"><span class="pre">&lt;keyfile&gt;</span></code> is the name of the file that doesn’t have the <code class="docutils literal notranslate"><span class="pre">.pub</span></code> extension.</p>
+<blockquote>
+<div><p><strong>Note:</strong>
+If you connect from a Windows machine, replace the directory in <code class="docutils literal notranslate"><span class="pre">ControlPath</span></code> with <code class="docutils literal notranslate"><span class="pre">~/.ssh/sockets/%r&#64;%h-%p</span></code> and make sure to create the folder <code class="docutils literal notranslate"><span class="pre">sockets</span></code> inside your hidden <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> folder. If it still doesn’t work, try to completely remove the <code class="docutils literal notranslate"><span class="pre">ControlPath</span></code> and <code class="docutils literal notranslate"><span class="pre">ControlMaster</span></code> lines.</p>
+</div></blockquote>
+</section>
+<section id="setup-two-factor-authentication">
+<h2>Setup two factor authentication<a class="headerlink" href="#setup-two-factor-authentication" title="Link to this heading"></a></h2>
+<p>Contact Ulrik to setup two factor authentication. In most cases this requires a visit to his office.</p>
+</section>
+<section id="test-account">
+<h2>Test account<a class="headerlink" href="#test-account" title="Link to this heading"></a></h2>
+<p>Now from the terminal (command) window try</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>nectar9
+</pre></div>
+</div>
+<p>and confirm that it logs you in. If it doesn’t work, do</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-vvv<span class="w"> </span>nectar9
+</pre></div>
+</div>
+<p>and ask for help, including the output of the last command.</p>
+</section>
+<section id="disk-space">
+<h2>Disk space<a class="headerlink" href="#disk-space" title="Link to this heading"></a></h2>
+<p>On the <code class="docutils literal notranslate"><span class="pre">nectar</span></code> cluster you have a home directory at <code class="docutils literal notranslate"><span class="pre">/home/&lt;user&gt;</span></code>. You are the only one who can read content in that directory. To share data with other users, create a directory below <code class="docutils literal notranslate"><span class="pre">/shared</span></code> that has an explaining name. Everybody on the cluster will have access to those files.</p>
+<p>Be aware that there is <strong>no backup</strong> and <strong>no undo</strong> of files you delete, or indeed everything if there is a disk failure. For code, you should use GitHub/Gitlab or similar to track your changes and for data, it should either be available elsewhere or should be relatively easy to recreate.</p>
+</section>
+<section id="using-the-nectar-computing-cluster-with-htcondor">
+<h2>Using the Nectar computing cluster with HTCondor<a class="headerlink" href="#using-the-nectar-computing-cluster-with-htcondor" title="Link to this heading"></a></h2>
+<p>HTCondor is a system for assigning independent executables or “jobs” across shared computational resources, which is perfect in this case, as we can use it to manage jobs on a large scale executed on the Nectar machine. The Nectar cluster has a portion of its computational resources for the tasks we perform day-to-day, referred to as the ‘frontend’ (the <code class="docutils literal notranslate"><span class="pre">nectar9</span></code> machine you log in to); this has 16 CPU cores and 62 GB of RAM. The other portion of the cluster consists of large worker nodes, referred to as the ‘backend’, with 32 CPU cores and 128 GB of RAM each. The number of workers can vary as they are provisioned on demand, but all together they pool to roughly 390 cores and 1.5 TB of RAM. The worker nodes are purely used to execute jobs on a large scale, quickly, through parallelisation. Note that the workers only have around 20 GB of local scratch disk each, so jobs should write their outputs back to <code class="docutils literal notranslate"><span class="pre">/home</span></code> or <code class="docutils literal notranslate"><span class="pre">/shared</span></code> rather than accumulate data on the worker itself.</p>
+<p>A quick start guide can be found <a class="reference external" href="https://htcondor.readthedocs.io/en/25.0/users-manual/quick-start-guide.html">here</a>, there is also some specific particle physics use cases below.</p>
+<section id="running-an-executable-on-a-large-group-of-data-files">
+<h3>Running an executable on a large group of data files<a class="headerlink" href="#running-an-executable-on-a-large-group-of-data-files" title="Link to this heading"></a></h3>
+<p>One example of such a task is applying an MVA decision to all your different ROOT data files. For all HTCondor pipelines, you are running a bash script with arguments, where each job executes the script independently with its own set of arguments. Such a script can be named <code class="docutils literal notranslate"><span class="pre">apply_run.sh</span></code>, and is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+
+# Create MVA terms  
+
+FOLD=$1
+NUMBER=$2
+POLARITY=$3
+YEAR=$4
+MC=$5
+
+# Activate the base environment
+source /home/bonacci/miniconda3/bin/activate base
+conda activate env
+
+cd /home/bonacci/xiccmultiplicity/ApplySelection/Step3_MVA_Training/Lc2pKPi
+
+# Run MVA classifier on Lc data:
+python apply.py -f $FOLD -n $NUMBER -p $POLARITY -y $YEAR -mc $MC
+
+echo &quot;Done&quot;
+
+</pre></div>
+</div>
+<p>In the bash script you can house things like running a python script (here <code class="docutils literal notranslate"><span class="pre">apply.py</span></code>) with arguments that differ from job to job. Keep in mind that the script runs on a worker node, not in your interactive shell, so it must set up its own environment -&gt; source your conda/LbEnv environment and <code class="docutils literal notranslate"><span class="pre">cd</span></code> to the directory where your scripts live, as in the example above (replace the paths with your own).</p>
+<p>You will then have to set up the parameters that are inserted as the arguments. This is done in an HTCondor <em>submit description file</em>. Note that this is <strong>not</strong> a bash script, it has its own syntax, and by convention it is given the extension <code class="docutils literal notranslate"><span class="pre">.sub</span></code>. Such a file (<code class="docutils literal notranslate"><span class="pre">apply_submit.sub</span></code>) is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>executable            = apply_run.sh
+output                = logs/apply_run.$(ClusterId).$(ProcId).out
+error                 = logs/apply_run.$(ClusterId).$(ProcId).err
+log                   = logs/apply_run.log
+
+# Insert a job name here
++JobBatchName         = &quot;Apply MVA Data/MC&quot;
+
+# Set the CPU and memory requirements of each job
+request_cpus          = 1
+request_memory        = 2000M
+
+# Stream output/error live while the job runs
+stream_output         = True
+stream_error          = True
+
+# Run over folds, numbers, polarities, years, MC/data:
+# Queue rows are: 
+# FOLD=$1
+# NUMBER=$2
+# POLARITY=$3
+# YEAR=$4
+# MC=$5
+
+arguments             = $(FOLD) $(NUMBER) $(POLARITY) $(YEAR) $(MC)
+QUEUE_FILE            = queue_args.txt
+queue FOLD, NUMBER, POLARITY, YEAR, MC from $(QUEUE_FILE)
+
+</pre></div>
+</div>
+<p>The first line gives the executable, which in this case is the bash script you want to run. The corresponding <code class="docutils literal notranslate"><span class="pre">output</span></code>, <code class="docutils literal notranslate"><span class="pre">error</span></code> and <code class="docutils literal notranslate"><span class="pre">log</span></code> lines say where each job’s stdout, stderr and the overall HTCondor event log are written; the log file is useful in figuring out what is happening (or has happened) to your jobs. Note that HTCondor will <strong>not</strong> create the <code class="docutils literal notranslate"><span class="pre">logs</span></code> directory for you — create it before submitting with <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">logs</span></code>, otherwise the jobs will fail to start. The <code class="docutils literal notranslate"><span class="pre">request_cpus</span></code> and <code class="docutils literal notranslate"><span class="pre">request_memory</span></code> lines do as they sound, setting the number of CPUs and the memory limit for each job; the memory is something to gauge depending on the jobs being executed, and a job that exceeds its request will be put on hold. Then there are the <code class="docutils literal notranslate"><span class="pre">arguments</span></code>, which must be in the same order as the bash script expects them -&gt; this is where the per-job arguments are filled in. The <code class="docutils literal notranslate"><span class="pre">QUEUE_FILE</span></code> is a text file that you must create, housing the argument values for each job, one job per line. An example of <code class="docutils literal notranslate"><span class="pre">queue_args.txt</span></code> for the above is displayed below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="mi">0</span> <span class="n">MagDown</span> <span class="mi">2018</span> <span class="mi">0</span> 
+<span class="mi">0</span> <span class="mi">0</span> <span class="n">MagUp</span> <span class="mi">2018</span> <span class="mi">0</span> 
+<span class="mi">0</span> <span class="mi">1</span> <span class="n">MagDown</span> <span class="mi">2018</span> <span class="mi">0</span> 
+<span class="mi">0</span> <span class="mi">1</span> <span class="n">MagUp</span> <span class="mi">2018</span> <span class="mi">0</span> 
+<span class="mi">0</span> <span class="mi">2</span> <span class="n">MagDown</span> <span class="mi">2018</span> <span class="mi">0</span> 
+<span class="mi">0</span> <span class="mi">2</span> <span class="n">MagUp</span> <span class="mi">2018</span> <span class="mi">0</span> 
+<span class="mi">0</span> <span class="mi">3</span> <span class="n">MagDown</span> <span class="mi">2018</span> <span class="mi">0</span> 
+<span class="mi">0</span> <span class="mi">3</span> <span class="n">MagUp</span> <span class="mi">2018</span> <span class="mi">0</span> 
+<span class="mi">0</span> <span class="mi">4</span> <span class="n">MagDown</span> <span class="mi">2018</span> <span class="mi">0</span> 
+<span class="mi">0</span> <span class="mi">4</span> <span class="n">MagUp</span> <span class="mi">2018</span> <span class="mi">0</span> 
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>The last line of the submit file queues one job per row of the queue file, with the corresponding arguments. We can then finally submit the jobs to the batch system through the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">condor_submit</span> <span class="n">apply_submit</span><span class="o">.</span><span class="n">sub</span>
+</pre></div>
+</div>
+<p>Now our jobs will all be submitted and you should get back something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[bonacci@nectar9 Lc2pKPi]$ condor_submit apply_submit.sub 
+Submitting job(s)..................................................................................................................................................................................................................................................................................................................................................................................................................
+402 job(s) submitted to cluster 10035.
+</pre></div>
+</div>
+<p>There are different commands to check on the status of jobs, though the main one is <code class="docutils literal notranslate"><span class="pre">condor_q</span></code>. Doing so will output a summary of the status of all jobs submitted:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[bonacci@nectar9 Lc2pKPi]$ condor_q
+
+
+-- Schedd: nectar9.novalocal : &lt;192.168.2.134:9618?... @ 06/11/26 17:43:38
+OWNER   BATCH_NAME                      SUBMITTED   DONE   RUN    IDLE  TOTAL JOB_IDS
+bonacci Apply MVA Data/MC              6/11 17:43      _      1    401    402 10035.0-401
+
+Total for query: 402 jobs; 0 completed, 0 removed, 401 idle, 1 running, 0 held, 0 suspended 
+Total for bonacci: 402 jobs; 0 completed, 0 removed, 401 idle, 1 running, 0 held, 0 suspended 
+Total for all users: 402 jobs; 0 completed, 0 removed,
+</pre></div>
+</div>
+<p>You can of course also check on the status of jobs by looking in <code class="docutils literal notranslate"><span class="pre">logs</span></code> to see what the jobs are outputting. This is where <code class="docutils literal notranslate"><span class="pre">stream_output</span></code> and <code class="docutils literal notranslate"><span class="pre">stream_error</span></code> are particularly nice, as you are able to see the output while the jobs run, which could save you time if you notice something going wrong while a job is still running. If these are not set, the job output and error files only appear after a job has completed. Submitted jobs will sit in <code class="docutils literal notranslate"><span class="pre">IDLE</span></code> until they are assigned to a worker node, at which point they will <code class="docutils literal notranslate"><span class="pre">RUN</span></code>. If a problem is encountered in the script, or perhaps the memory constraint is reached, the job will be <code class="docutils literal notranslate"><span class="pre">HELD</span></code>. In this case <code class="docutils literal notranslate"><span class="pre">condor_q</span> <span class="pre">-held</span></code> shows the hold reason directly, and the <code class="docutils literal notranslate"><span class="pre">logs</span></code> usually contain the details. Jobs can be removed with <code class="docutils literal notranslate"><span class="pre">condor_rm</span> <span class="pre">&lt;ClusterId&gt;</span></code> for the whole batch, <code class="docutils literal notranslate"><span class="pre">condor_rm</span> <span class="pre">&lt;ClusterId&gt;.&lt;ProcId&gt;</span></code> for a single job, or <code class="docutils literal notranslate"><span class="pre">condor_rm</span> <span class="pre">$USER</span></code> for everything you have submitted. As jobs finish they move to the <code class="docutils literal notranslate"><span class="pre">DONE</span></code> column, and once all jobs in the cluster have completed they disappear from <code class="docutils literal notranslate"><span class="pre">condor_q</span></code> entirely, you can still inspect finished jobs with <code class="docutils literal notranslate"><span class="pre">condor_history</span></code> (or <code class="docutils literal notranslate"><span class="pre">condor_history</span> <span class="pre">-l</span> <span class="pre">&lt;jobid&gt;</span></code> for full details). If everything has gone through, you have successfully executed all your jobs.</p>
+</section>
+<section id="downloading-a-group-of-data-files-from-analysis-productions-any-files-from-dirac">
+<h3>Downloading a group of data files from Analysis Productions (any files from DIRAC)<a class="headerlink" href="#downloading-a-group-of-data-files-from-analysis-productions-any-files-from-dirac" title="Link to this heading"></a></h3>
+<p>Like the example above, downloading a large group of files from the grid parallelises perfectly with HTCondor: one job per file. The extra ingredient compared to the previous example is that reading files from grid storage (PFNs of the form <code class="docutils literal notranslate"><span class="pre">root://eoslhcb.cern.ch//eos/lhcb/...</span></code>) requires a valid <strong>grid proxy</strong>, and that proxy has to be made available to every job on the worker nodes.</p>
+<section id="setting-up-the-grid-proxy">
+<h4>Setting up the grid proxy<a class="headerlink" href="#setting-up-the-grid-proxy" title="Link to this heading"></a></h4>
+<p>First, generate a proxy on the frontend:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lhcb-proxy-init
+</pre></div>
+</div>
+<p>By default the proxy is written to <code class="docutils literal notranslate"><span class="pre">/tmp/x509up_u$(id</span> <span class="pre">-u)</span></code>. It is however much better to export it to a fixed location in your home directory, by setting the <code class="docutils literal notranslate"><span class="pre">X509_USER_PROXY</span></code> environment variable in your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> <strong>before</strong> running <code class="docutils literal notranslate"><span class="pre">lhcb-proxy-init</span></code>, both the proxy creation and all grid tools respect it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">X509_USER_PROXY</span><span class="o">=</span>/home/&lt;user&gt;/.grid.proxy
+</pre></div>
+</div>
+<p>The reason this matters: a proxy is only valid for <strong>24 hours</strong>. If your batch of download jobs takes longer than that (hundreds of large files can easily run over several days as jobs queue up), jobs that start after the proxy expires will fail to authenticate. With the proxy at a fixed path in your home directory, you can simply re-run <code class="docutils literal notranslate"><span class="pre">lhcb-proxy-init</span></code> at any point (i.e. once in every 24-hour period) and the renewed proxy is picked up from the same path, allowing the remaining jobs to continue without resubmitting anything. Check what is left on your proxy at any time with <code class="docutils literal notranslate"><span class="pre">lhcb-proxy-info</span></code>.</p>
+</section>
+<section id="getting-the-list-of-pfns">
+<h4>Getting the list of PFNs<a class="headerlink" href="#getting-the-list-of-pfns" title="Link to this heading"></a></h4>
+<p>Next you need the list of PFNs to download. For files from <a class="reference external" href="https://lhcb-productions.web.cern.ch/ana-prod/">Analysis Productions</a> the easiest way is the <a class="reference external" href="https://gitlab.cern.ch/lhcb-dpa/analysis-productions/apd">apd</a> python package, with which you can look up your production and write the PFNs into the HTCondor queue file. A script (<code class="docutils literal notranslate"><span class="pre">Load_pfn_names.py</span></code>) for doing this is shown below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">apd</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnalysisData</span>
+
+<span class="c1"># The working group and analysis name of your production:</span>
+<span class="n">datasets</span> <span class="o">=</span> <span class="n">AnalysisData</span><span class="p">(</span><span class="s2">&quot;charm&quot;</span><span class="p">,</span> <span class="s2">&quot;xicc_24mctrack&quot;</span><span class="p">)</span>
+
+<span class="n">job_names</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;mc_24_w31_magup_sim10g-redecay01_26266052_xiccpp2lckpipi_tuple&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mc_24_w32_34_magup_sim10g-redecay01_26266052_xiccpp2lckpipi_tuple&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">job_names</span><span class="p">:</span>
+    <span class="n">pfns</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="s2">&quot;mc&quot;</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s2">&quot;2024&quot;</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=</span><span class="s2">&quot;tuple.root&quot;</span><span class="p">,</span>
+                    <span class="n">polarity</span><span class="o">=</span><span class="s2">&quot;magup&quot;</span><span class="p">,</span> <span class="n">eventtype</span><span class="o">=</span><span class="s2">&quot;26266052&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">pfn</span> <span class="ow">in</span> <span class="n">pfns</span><span class="p">:</span>
+        <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;Hcc_LcpKmPipPip&quot;</span><span class="p">,</span> <span class="n">pfn</span><span class="p">,</span> <span class="s2">&quot;MC&quot;</span><span class="p">))</span>
+
+<span class="c1"># Write the queue file: JOB_NAME JOB_TREE IDX TOTAL PFN DATATYPE</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;condor_pfn_queue.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">job_name</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">pfn</span><span class="p">,</span> <span class="n">datatype</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">entries</span><span class="p">):</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">job_name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">tree</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">pfn</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">datatype</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Written </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2"> entries to condor_pfn_queue.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The arguments to the <code class="docutils literal notranslate"><span class="pre">datasets(...)</span></code> call select which sample you want (data taking year, polarity, event type etc.), you can find the right values for your production on the Analysis Productions web page. Each row of the resulting <code class="docutils literal notranslate"><span class="pre">condor_pfn_queue.txt</span></code> contains everything one job needs: a name and tree for the output file, an index so the output files are uniquely named, the PFN to read, and a flag for whether it is data or MC.</p>
+</section>
+<section id="the-submit-file">
+<h4>The submit file<a class="headerlink" href="#the-submit-file" title="Link to this heading"></a></h4>
+<p>The submit file (<code class="docutils literal notranslate"><span class="pre">download_pfns_submit.sub</span></code>) follows the same pattern as before, with one important addition: the <code class="docutils literal notranslate"><span class="pre">use_x509userproxy</span></code> lines tell HTCondor to ship your grid proxy into each job’s sandbox and set <code class="docutils literal notranslate"><span class="pre">X509_USER_PROXY</span></code> for the job automatically.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>universe              = vanilla
+executable            = download_pfns_run.sh
+
+# Queue file to read. This can be overridden at submit time
+# (`condor_submit download_pfns_submit.sub QUEUE_FILE=retry_queue.txt`),
+# which is handy for resubmitting only the jobs that failed.
+QUEUE_FILE            = condor_pfn_queue.txt
+
+# Queue rows are: JOB_NAME JOB_TREE IDX TOTAL PFN DATATYPE
+arguments             = $(JOB_NAME) $(JOB_TREE) $(IDX) $(TOTAL) $(PFN) $(DATATYPE)
+
+output                = condor_logs/download_pfns.$(ClusterId).$(ProcId).out
+error                 = condor_logs/download_pfns.$(ClusterId).$(ProcId).err
+log                   = condor_logs/download_pfns.log
++JobBatchName         = &quot;DownloadPFNs&quot;
+
+# Resource requests: ROOT jobs exceed the default 128MB limit.
+request_cpus          = 1
+request_memory        = 2GB
+request_disk          = 200MB
+
+getenv                = True
+stream_output         = True
+stream_error          = True
+
+# XRootD access to eoslhcb requires a valid grid proxy.
+use_x509userproxy     = True
+x509userproxy         = $ENV(X509_USER_PROXY)
+
+queue JOB_NAME, JOB_TREE, IDX, TOTAL, PFN, DATATYPE from $(QUEUE_FILE)
+</pre></div>
+</div>
+</section>
+<section id="the-job-scripts">
+<h4>The job scripts<a class="headerlink" href="#the-job-scripts" title="Link to this heading"></a></h4>
+<p>The executable bash script (<code class="docutils literal notranslate"><span class="pre">download_pfns_run.sh</span></code>) is again the same pattern as before: take the arguments, set up the environment, work out the output path and run the python script that does the actual download. Write the output somewhere with enough space, such as a directory under <code class="docutils literal notranslate"><span class="pre">/shared</span></code> (remember the worker nodes themselves only have ~20 GB of scratch disk).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nv">JOB_NAME</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="nv">JOB_TREE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+<span class="nv">IDX</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span>
+<span class="nv">TOTAL</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$4</span><span class="s2">&quot;</span>
+<span class="nv">INPUT_FILENAME</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$5</span><span class="s2">&quot;</span>
+<span class="nv">DATATYPE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$6</span><span class="s2">&quot;</span>
+
+<span class="nb">source</span><span class="w"> </span>/home/bonacci/miniconda3/bin/activate<span class="w"> </span>base
+conda<span class="w"> </span>activate<span class="w"> </span>env
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">X509_USER_PROXY</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>!<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">X509_USER_PROXY</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: no readable X509 proxy found&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">3</span>
+<span class="k">fi</span>
+
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;/shared/XiccMultiplicityRun3/Xicc2LcKPiPi/</span><span class="si">${</span><span class="nv">DATATYPE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="si">${</span><span class="nv">JOB_NAME</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">JOB_TREE</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">IDX</span><span class="si">}</span><span class="s2">of</span><span class="si">${</span><span class="nv">TOTAL</span><span class="si">}</span><span class="s2">.root&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PFN: </span><span class="nv">$INPUT_FILENAME</span><span class="s2"> | Tree: </span><span class="nv">$JOB_TREE</span><span class="s2"> | </span><span class="nv">$IDX</span><span class="s2">/</span><span class="nv">$TOTAL</span><span class="s2"> -&gt; </span><span class="nv">$OUTPUT_PATH</span><span class="s2">&quot;</span>
+
+python<span class="w"> </span>-u<span class="w"> </span>download_pfns.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INPUT_FILENAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-it<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">JOB_TREE</span><span class="si">}</span><span class="s2">/DecayTree&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-ot<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">JOB_TREE</span><span class="si">}</span><span class="s2">/DecayTree&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATATYPE</span><span class="s2">&quot;</span>
+
+<span class="o">[[</span><span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: output missing or empty: </span><span class="nv">$OUTPUT_PATH</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">5</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Done&quot;</span>
+</pre></div>
+</div>
+<p>The check on the last line makes a failed transfer show up as a failed job, rather than a silently missing file.</p>
+<p>If you just want an exact copy of each file, the python script can be replaced by a single <code class="docutils literal notranslate"><span class="pre">xrdcp</span> <span class="pre">&quot;$INPUT_FILENAME&quot;</span> <span class="pre">&quot;$OUTPUT_PATH&quot;</span></code>. Often though you want to skim the file while downloading it; select only certain trees, or apply a cut — so the files you store locally are much smaller. The python script (<code class="docutils literal notranslate"><span class="pre">download_pfns.py</span></code>) below streams the PFN with <code class="docutils literal notranslate"><span class="pre">RDataFrame</span></code>, applies a selection and saves only the result:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Stream PFNs and write skimmed ROOT files.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ROOT</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">input_tree</span><span class="p">,</span> <span class="n">output_name</span><span class="p">,</span> <span class="n">output_tree</span><span class="p">,</span> <span class="n">datatype</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing file </span><span class="si">{</span><span class="n">input_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Preflight open to catch authentication errors cleanly. If this fails,</span>
+    <span class="c1"># it commonly means the grid proxy is missing or has expired.</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">input_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="n">IsZombie</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR: failed to open input: </span><span class="si">{</span><span class="n">input_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+
+    <span class="c1"># Load the remote file as an RDataFrame:</span>
+    <span class="n">Data</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">RDataFrame</span><span class="p">(</span><span class="n">input_tree</span><span class="p">,</span> <span class="p">[</span><span class="n">input_name</span><span class="p">])</span>
+
+    <span class="c1"># Apply a skimming selection while downloading, e.g. a loose MVA cut:</span>
+    <span class="k">if</span> <span class="n">datatype</span> <span class="o">==</span> <span class="s2">&quot;lhcb&quot;</span><span class="p">:</span>
+        <span class="n">Data</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;Hcc_MVA &gt; 0.13&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Save a snapshot of the filtered data to the local output file:</span>
+    <span class="n">Data</span><span class="o">.</span><span class="n">Snapshot</span><span class="p">(</span><span class="n">output_tree</span><span class="p">,</span> <span class="n">output_name</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;PFN download/skim script&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span>  <span class="s2">&quot;--input_name&quot;</span><span class="p">,</span>  <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-it&quot;</span><span class="p">,</span> <span class="s2">&quot;--input_tree&quot;</span><span class="p">,</span>  <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-o&quot;</span><span class="p">,</span>  <span class="s2">&quot;--output_name&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-ot&quot;</span><span class="p">,</span> <span class="s2">&quot;--output_tree&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-d&quot;</span><span class="p">,</span>  <span class="s2">&quot;--datatype&quot;</span><span class="p">,</span>    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input_name</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">input_tree</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output_name</span><span class="p">,</span>
+         <span class="n">args</span><span class="o">.</span><span class="n">output_tree</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">datatype</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="putting-it-all-together">
+<h4>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Link to this heading"></a></h4>
+<p>The whole pipeline can then be driven from a single steering script that checks the proxy, builds the queue file and submits:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="c1"># Ensure a readable grid proxy is available for XRootD access to eoslhcb.</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">X509_USER_PROXY</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>!<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">X509_USER_PROXY</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: No readable X509 proxy found. Run: lhcb-proxy-init&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">5</span>
+<span class="k">fi</span>
+
+<span class="c1"># Build the queue file of PFNs to download:</span>
+python<span class="w"> </span>Load_pfn_names.py
+
+<span class="c1"># Submit the download jobs:</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>condor_logs
+condor_submit<span class="w"> </span>download_pfns_submit.sub
+
+<span class="c1"># Block until all jobs in the batch have finished (useful when this</span>
+<span class="c1"># is a step of a larger pipeline):</span>
+condor_wait<span class="w"> </span>condor_logs/download_pfns.log
+</pre></div>
+</div>
+<p>One final practical tip: grid transfers occasionally fail for transient reasons (a storage element times out, a brief network glitch). Rather than resubmitting everything, copy the rows of the queue file corresponding to the failed jobs into a new file and resubmit only those with <code class="docutils literal notranslate"><span class="pre">condor_submit</span> <span class="pre">download_pfns_submit.sub</span> <span class="pre">QUEUE_FILE=retry_queue.txt</span></code>.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lhcbregistration.html" class="btn btn-neutral float-left" title="Registration in the LHCb collaboration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="codedevelopment.html" class="btn btn-neutral float-right" title="Code development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Monash LHCb.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
